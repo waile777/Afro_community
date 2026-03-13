@@ -27,7 +27,12 @@ class AuthController extends Controller
             ]
         ]);
         $roleUser = $request->has('role') ? User::ROLE_DJ : User::ROLE_LISTENER;
-        $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
+        }else {
+            $path = 'profile_pictures/default_profile.png';
+        }
+
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
