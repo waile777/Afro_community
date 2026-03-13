@@ -1,0 +1,83 @@
+models:
+
+  User:
+    first_name: string:100
+    last_name: string:100
+    email: string:150 unique
+    password: string
+    role: enum:listener,dj,admin default(listener)
+    account_status: enum:active,pending,suspended default(active)
+    profile_picture: string:255 nullable
+    timestamps
+
+  DjProfile:
+    user_id: id foreign
+    stage_name: string:150
+    bio: text nullable
+    verification_status: enum:pending,approved,rejected default(pending)
+    timestamps
+
+  Mix:
+    user_id: id foreign
+    title: string:255
+    description: text nullable
+    audio_file: string:255
+    cover_image: string:255 nullable
+    genre: enum:afrohouse,afrotech,afrotribal,amapiano,3step,afroprogressive
+    bpm: integer nullable
+    status: enum:pending,approved,rejected default(pending)
+    view_count: integer default(0)
+    timestamps
+
+  MixLike:
+    user_id: id foreign
+    mix_id: id foreign
+    timestamps
+
+  Comment:
+    user_id: id foreign
+    mix_id: id foreign
+    content: text
+    timestamps
+
+  Follow:
+    follower_id: id foreign
+    following_id: id foreign
+    timestamps
+
+  Event:
+    dj_id: id foreign
+    title: string:255
+    description: text nullable
+    event_date: datetime
+    location: string:255 nullable
+    timestamps
+
+  Ticket:
+    event_id: id foreign
+    type: string:100
+    price: decimal:10,2
+    quantity: integer
+    timestamps
+
+  Reservation:
+    user_id: id foreign
+    ticket_id: id foreign
+    reserved_at: timestamp
+
+  Playlist:
+    user_id: id foreign
+    name: string:150
+    timestamps
+
+  PlaylistMix:
+    playlist_id: id foreign
+    mix_id: id foreign
+    primary: playlist_id,mix_id
+
+  AiAnalysis:
+    mix_id: id foreign
+    detected_bpm: integer nullable
+    detected_genre: string:100 nullable
+    explicit_content: boolean default(false)
+

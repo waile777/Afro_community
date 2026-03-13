@@ -1,0 +1,50 @@
+created:
+    - database/factories/UserFactory.php
+    - database/factories/DjProfileFactory.php
+    - database/factories/MixFactory.php
+    - database/factories/MixLikeFactory.php
+    - database/factories/CommentFactory.php
+    - database/factories/FollowFactory.php
+    - database/factories/EventFactory.php
+    - database/factories/TicketFactory.php
+    - database/factories/ReservationFactory.php
+    - database/factories/PlaylistFactory.php
+    - database/factories/PlaylistMixFactory.php
+    - database/factories/AiAnalysisFactory.php
+    - database/migrations/2026_03_05_090654_create_users_table.php
+    - database/migrations/2026_03_05_090655_create_dj_profiles_table.php
+    - database/migrations/2026_03_05_090656_create_mixes_table.php
+    - database/migrations/2026_03_05_090657_create_mix_likes_table.php
+    - database/migrations/2026_03_05_090658_create_comments_table.php
+    - database/migrations/2026_03_05_090659_create_follows_table.php
+    - database/migrations/2026_03_05_090700_create_events_table.php
+    - database/migrations/2026_03_05_090701_create_tickets_table.php
+    - database/migrations/2026_03_05_090702_create_reservations_table.php
+    - database/migrations/2026_03_05_090703_create_playlists_table.php
+    - database/migrations/2026_03_05_090704_create_playlist_mixes_table.php
+    - database/migrations/2026_03_05_090705_create_ai_analyses_table.php
+    - app/Models/User.php
+    - app/Models/DjProfile.php
+    - app/Models/Mix.php
+    - app/Models/MixLike.php
+    - app/Models/Comment.php
+    - app/Models/Follow.php
+    - app/Models/Event.php
+    - app/Models/Ticket.php
+    - app/Models/Reservation.php
+    - app/Models/Playlist.php
+    - app/Models/PlaylistMix.php
+    - app/Models/AiAnalysis.php
+models:
+    User: { first_name: 'string:100', last_name: 'string:100', email: 'string:150 unique', password: string, role: 'enum:listener,dj,admin default(listener)', account_status: 'enum:active,pending,suspended default(active)', timestamps: timestamps }
+    DjProfile: { user_id: 'id foreign', stage_name: 'string:150', bio: 'text nullable', verification_status: 'enum:pending,approved,rejected default(pending)', timestamps: timestamps }
+    Mix: { user_id: 'id foreign', title: 'string:255', description: 'text nullable', audio_file: 'string:255', cover_image: 'string:255 nullable', genre: 'enum:afrohouse,afrotech,afrotribal,amapiano,3step,afroprogressive', bpm: 'integer nullable', status: 'enum:pending,approved,rejected default(pending)', view_count: 'integer default(0)', timestamps: timestamps }
+    MixLike: { user_id: 'id foreign', mix_id: 'id foreign', timestamps: timestamps }
+    Comment: { user_id: 'id foreign', mix_id: 'id foreign', content: text, timestamps: timestamps }
+    Follow: { follower_id: 'id foreign', following_id: 'id foreign', timestamps: timestamps }
+    Event: { dj_id: 'id foreign', title: 'string:255', description: 'text nullable', event_date: datetime, location: 'string:255 nullable', timestamps: timestamps }
+    Ticket: { event_id: 'id foreign', type: 'string:100', price: 'decimal:10,2', quantity: integer, timestamps: timestamps }
+    Reservation: { user_id: 'id foreign', ticket_id: 'id foreign', reserved_at: timestamp }
+    Playlist: { user_id: 'id foreign', name: 'string:150', timestamps: timestamps }
+    PlaylistMix: { playlist_id: 'id foreign', mix_id: 'id foreign', primary: 'playlist_id,mix_id' }
+    AiAnalysis: { mix_id: 'id foreign', detected_bpm: 'integer nullable', detected_genre: 'string:100 nullable', explicit_content: 'boolean default(false)' }

@@ -1,0 +1,9 @@
+{
+    4|V6Gd7faZvPqQhYepXl4hPD3nHiFLf3YmOMmOremNcc55221e
+    "email" : "dj@mail.com",
+    "password" : "dj77777",
+    "first_name": "dj",
+    "last_name": "dj",
+    "role": "dj"
+}
+--------------------------------------------------------------
