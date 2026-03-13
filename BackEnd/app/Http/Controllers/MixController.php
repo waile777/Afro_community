@@ -33,14 +33,10 @@ class MixController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'audio_file' => 'required|file',
+            'audio_file' => 'required|mimes:mp3,wav|max:102400',
             'bpm' => 'required',
             'genre' => 'required|string',
-            'cover_image' => [
-                'image',
-                'mimes:jpg,png,jpeg,gif,svg',
-            ],
-
+            'cover_image' => 'image|mimes:jpg,png,jpeg|max:2048',
         ]);
         $pathAudioFile = $request->file('audio_file')->store('mixes', 'public');
         if ($request->hasFile('cover_image')) {
@@ -96,7 +92,6 @@ class MixController extends Controller
      */
     public function destroy(Mix $mix)
     {
-        $mix = Mix::findOrFail($mix);
         if ($mix->user_id != Auth::id() || Auth::user()->role != 'admin') {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
@@ -104,12 +99,12 @@ class MixController extends Controller
         return response()->json(['message' => 'mix deleted successfuly']);
     }
 
-    public function play(Mix $mix)
+    public function incrementPlays($id)
     {
-        $mix = Mix::findOrFail($mix);
-        $mix->increment('play_count');
+        $mix = Mix::findOrFail($id);
+        $mix->increment('view_count');
         return response()->json([
-            'plays' => $mix->play_count
+            'plays' => $mix->view_count
         ]);
     }
 }
