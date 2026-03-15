@@ -23,7 +23,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Mix $mix)
+    public function store(Request $request, $id)
     {
         $request->validate([
             'content' => 'required|min:1|string|max:255'
@@ -31,7 +31,7 @@ class CommentController extends Controller
 
         $comment = Comment::create([
             'user_id' => Auth::id(),
-            'mix_id' => $mix->id,
+            'mix_id' => $id,
             'content' => $request->content
         ]);
         return response()->json($comment);
@@ -40,17 +40,19 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show($id)
     {
+        $comment = Comment::findOrFail($id);
         return  $comment->load('user');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request,$id)
     {
-        if ($comment->user_id != Auth::id()) {
+        $comment = Comment::findOrFail($id);
+        if ($comment->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
         $commentUpdated = $comment->update($request->only([
@@ -65,8 +67,9 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($idComment)
     {
+        $comment = Comment::findOrFail($idComment);
         if ($comment->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }

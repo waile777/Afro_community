@@ -13,8 +13,9 @@ class PlaylistMixController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Playlist $playlist)
+    public function index($id)
     {
+        $playlist = Playlist::findOrFail($id);
         $playlist->load('mixes');
         return response()->json([
             'playlist' => $playlist
@@ -24,9 +25,11 @@ class PlaylistMixController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Playlist $playlist, Mix $mix)
+    public function store($idPlaylist, $idMix)
     {
-        if ($playlist->user_id != Auth::id()) {
+        $playlist = Playlist::findOrFail($idPlaylist);
+        $mix = Playlist::findOrFail($idMix);
+        if ($playlist->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
         PlaylistMix::firstOrCreate([
@@ -41,8 +44,10 @@ class PlaylistMixController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Playlist $playlist, Mix $mix)
+    public function destroy($idPlaylist, $idMix)
     {
+        $playlist = Playlist::findOrFail($idPlaylist);
+        $mix = Playlist::findOrFail($idMix);
         $playlistMix = PlaylistMix::where('playlist_id', $playlist->id)
             ->where('mix_id', $mix->id)
             ->firstOrFail();

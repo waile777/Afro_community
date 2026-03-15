@@ -41,6 +41,6 @@ class Playlist extends Model
 
     public function mixes(): BelongsToMany
     {
-        return $this->belongsToMany(Mix::class);
+        return $this->belongsToMany(Mix::class , 'playlist_mixes');
     }
 }

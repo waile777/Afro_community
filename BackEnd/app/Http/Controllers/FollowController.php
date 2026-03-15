@@ -28,23 +28,23 @@ class FollowController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user)
+    public function store($id)
     {
+        $following = User::findOrFail($id);
         $follower_id = Auth::id();
-        $following_id = $user->id;
-        if ($follower_id == $following_id) {
+        if ($follower_id == $following->id) {
             return response()->json([
                 'error' => 'cannot follow yourself'
             ]);
         }
-        if ($user->role !== 'dj') {
+        if ($following->role !== 'dj') {
             return response()->json([
                 'error' => 'you can only follow dj'
             ], 403);
         }
         $follow = Follow::firstOrCreate([
             'follower_id' => $follower_id,
-            'following_id' => $following_id
+            'following_id' => $following->id
         ]);
         return response()->json([
             'follow' => $follow
@@ -54,8 +54,9 @@ class FollowController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
+        $user = User::findOrFail($id);
         if ($user->role !== 'dj') {
             return response()->json([
                 'error' => 'user must be dj'
@@ -71,8 +72,9 @@ class FollowController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::findOrFail($id);
         $follower_id = Auth::id();
         $following_id = $user->id;
         $follow_removed = Follow::where('follower_id', $follower_id)->where('following_id', $following_id)->firstOrFail();

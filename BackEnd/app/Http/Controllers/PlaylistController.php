@@ -13,7 +13,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $playlists = Playlist::where('user_id', Auth::id());
+        $playlists = Playlist::where('user_id', Auth::id())->get();
         return response()->json([
             'playlists' => $playlists
         ]);
@@ -47,8 +47,9 @@ class PlaylistController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Playlist $playlist)
+    public function update(Request $request, $id)
     {
+        $playlist = Playlist::findOrFail($id);
         if (Auth::id() !== $playlist->user_id) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
@@ -61,9 +62,10 @@ class PlaylistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Playlist $playlist)
+    public function destroy($id)
     {
-        if ($playlist->user_id != Auth::id() && Auth::user()->role != 'admin') {
+        $playlist = Playlist::findOrFail($id);
+        if ($playlist->user_id !== Auth::id() && Auth::user()->role !== 'admin') {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
         $playlist->delete();

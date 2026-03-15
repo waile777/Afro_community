@@ -9,20 +9,20 @@ use App\Models\MixLike;
 
 class MixLikesController extends Controller
 {
-    public function addLike(Mix $mix)
+    public function addLike($id)
     {
-        if (MixLike::where('mix_id', $mix->id)->where('user_id', Auth::id())->exists()) {
+        if (MixLike::where('mix_id', $id)->where('user_id', Auth::id())->exists()) {
             return response()->json(['error' => 'Already liked'], 409);
         }
-        MixLike::store([
+        MixLike::create([
             'user_id' => Auth::id(),
-            'mix_id' => $mix->id,
+            'mix_id' => $id,
         ]);
         return response()->json(['success' => 'Like added']);
     }
-    public function removeLike(Mix $mix)
+    public function removeLike($id)
     {
-        $mixLike = MixLike::where('user_id', Auth::id())->where('mix_id', $mix->id)->firstOrFail();
+        $mixLike = MixLike::where('user_id', Auth::id())->where('mix_id', $id)->firstOrFail();
         $mixLike->delete();
         return response()->json(['success' => 'Like removed']);
     }

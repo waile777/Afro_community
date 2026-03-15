@@ -1,9 +1,66 @@
 {
-    4|V6Gd7faZvPqQhYepXl4hPD3nHiFLf3YmOMmOremNcc55221e
+    4|V6Gd7faZvPqQhYepXl4hPD3nHiFLf3YmOMmOremNcc55221e,
+    6|xHSr20iZyoC4kHG5558MWXWNUFFyLf62dwml2C9I3a242d5f
     "email" : "dj@mail.com",
     "password" : "dj77777",
     "first_name": "dj",
     "last_name": "dj",
     "role": "dj"
+
+
+    {
+    "user_id": 2,
+    "title": "mix afro house",
+    "description": "best afrohouse",
+    "audio_file": "http://127.0.0.1:8000/storagemixes/A0h4pUW75HZa086rp9IG1Z19LMYaiEWWq7ANA0p9.mp3",
+    "cover_image": "http://127.0.0.1:8000/storage/covers/default_cover.png",
+    "genre": "afrohouse",
+    "bpm": "122",
+    "updated_at": "2026-03-13T12:48:48.000000Z",
+    "created_at": "2026-03-13T12:48:48.000000Z",
+    "id": 1
+}
+{
+    "user_id": 2,
+    "title": "mix afro house",
+    "description": "idd_aziz afrohouse",
+    "audio_file": "http://127.0.0.1:8000/storagemixes/sDJg9AnQJFBzJsq4UVEmM5cLALLYfh4ogngEKCoa.mp3",
+    "cover_image": "http://127.0.0.1:8000/storage/covers/default_cover.png",
+    "genre": "afrohouse",
+    "bpm": "122",
+    "updated_at": "2026-03-13T13:36:45.000000Z",
+    "created_at": "2026-03-13T13:36:45.000000Z",
+    "id": 2
+}
 }
 --------------------------------------------------------------
+{
+    "token": "5|w6t4bxi594dgvLvrG3g2LQgfy7cWlAuVuoMklvMYa6b92c50",
+    "user": {
+        "first_name": "anas",
+        "last_name": "anas",
+        "email": "anas@mail.com",
+        "role": "listener",
+        "profile_picture": "profile_pictures/default_profile.png",
+        "updated_at": "2026-03-13T11:00:56.000000Z",
+        "created_at": "2026-03-13T11:00:56.000000Z",
+        "id": 3
+    }
+    "password": "anas77777"
+}
+
+-------------------------------------------------------------------------------
+{
+    "token": "7|P9UgjOO3Fid7f8eb0Mz2pSst8yi3xab6SmzE0n5841d26f6b",
+    "user": {
+        "first_name": "leksous",
+        "last_name": "leksous",
+        "email": "leksous@mail.com",
+        "role": "dj",
+        "profile_picture": "profile_pictures/default_profile.png",
+        "updated_at": "2026-03-13T16:00:33.000000Z",
+        "created_at": "2026-03-13T16:00:33.000000Z",
+        "id": 4
+        "password": "leksous777",
+    }
+}

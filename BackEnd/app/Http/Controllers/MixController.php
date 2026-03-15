@@ -68,9 +68,10 @@ class MixController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mix $mix)
+    public function update(Request $request, $id)
     {
-        if ($mix->user_id != Auth::id()) {
+        $mix = Mix::findOrFail($id);
+        if ($mix->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
         $mixUpdated = $mix->update($request->only([
@@ -90,9 +91,10 @@ class MixController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mix $mix)
+    public function destroy($id)
     {
-        if ($mix->user_id != Auth::id() || Auth::user()->role != 'admin') {
+        $mix = Mix::findOrFail($id);
+        if ($mix->user_id !== Auth::id() && Auth::user()->role != 'admin') {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
         $mix->delete();
