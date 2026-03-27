@@ -24,12 +24,14 @@ class AuthController extends Controller
             'profile_picture' => [
                 'image',
                 'mimes:jpg,png,jpeg,gif,svg',
-            ]
+            ],
+            'stage_name' => 'nullable|string|max:100',
+            'bio' => 'nullable|string|max:1000',
         ]);
         $roleUser = $request->has('role') ? User::ROLE_DJ : User::ROLE_LISTENER;
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
-        }else {
+        } else {
             $path = 'profile_pictures/default_profile.png';
         }
 
@@ -64,6 +66,21 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token,
             'user' => $user
+        ]);
+    }
+
+    public function logOut(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'logged out successfuly'
+        ]);
+    }
+    public function logOutAll(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json([
+            'message' => 'logged out from all devices successfuly'
         ]);
     }
 }

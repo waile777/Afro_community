@@ -14,11 +14,7 @@ class FollowController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role != 'dj') {
-            return response()->json([
-                'followers' => []
-            ]);
-        }
+        $this->authorize('viewAny', Follow::class);
         $yourFollowers = Follow::with('follower')->where('following_id', Auth::id())->get();
         return response()->json([
             'followers' => $yourFollowers
@@ -31,16 +27,14 @@ class FollowController extends Controller
     public function store($id)
     {
         $following = User::findOrFail($id);
+        $this->authorize('create', [Follow::class, $following]);
+        $following = User::findOrFail($id);
         $follower_id = Auth::id();
-        if ($follower_id == $following->id) {
-            return response()->json([
-                'error' => 'cannot follow yourself'
-            ]);
-        }
-        if ($following->role !== 'dj') {
-            return response()->json([
-                'error' => 'you can only follow dj'
-            ], 403);
+        if (Follow::where('follower_id', Auth::id())
+            ->where('following_id', $following->id)
+            ->exists()
+        ) {
+            return response()->json(['message' => 'already following'], 409);
         }
         $follow = Follow::firstOrCreate([
             'follower_id' => $follower_id,

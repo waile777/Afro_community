@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mix;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,7 @@ class MixController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny' , Mix::class);
         $collectionMixes = Mix::with('user')->latest()->get();
         return response()->json([
             'mixes_with_users' => $collectionMixes
@@ -25,17 +27,14 @@ class MixController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->role !== 'dj'){
-            return response()->json([
-                'error' => 'only Djs can upload mix'
-            ],404);
-        }
+        $this->authorize('create' , Mix::class);  //Authorize the user to create Mixes should be a dj
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'audio_file' => 'required|mimes:mp3,wav|max:102400',
-            'bpm' => 'required',
-            'genre' => 'required|string',
+            'bpm' => 'required|integer|min:40|max:250',
+            'genre' => 'required|string|max:100',
             'cover_image' => 'image|mimes:jpg,png,jpeg|max:2048',
         ]);
         $pathAudioFile = $request->file('audio_file')->store('mixes', 'public');
@@ -59,10 +58,10 @@ class MixController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mix $mix)
+    public function show($id)
     {
         // get  => api/mix/2
-        return Mix::with(['user', 'comments'])->findOrFail($mix->id);
+        return Mix::with(['user', 'comments'])->findOrFail($id);
     }
 
     /**
@@ -71,9 +70,7 @@ class MixController extends Controller
     public function update(Request $request, $id)
     {
         $mix = Mix::findOrFail($id);
-        if ($mix->user_id !== Auth::id()) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
+        $this->authorize('update' , $mix);
         $mixUpdated = $mix->update($request->only([
             'title',
             'description',
@@ -94,9 +91,7 @@ class MixController extends Controller
     public function destroy($id)
     {
         $mix = Mix::findOrFail($id);
-        if ($mix->user_id !== Auth::id() && Auth::user()->role != 'admin') {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
+        $this->authorize('delete' , $mix);
         $mix->delete();
         return response()->json(['message' => 'mix deleted successfuly']);
     }

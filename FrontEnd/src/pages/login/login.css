@@ -1,0 +1,149 @@
+.login-page {
+  display: flex;
+  align-items: flex-start;
+  background: linear-gradient(
+    160deg,
+    var(--bg-main) 0%,
+    #14143a 40%,
+    #060624 100%
+  );
+  height: 100vh;
+}
+/* left section */
+.login-page .left-section {
+  width: 70%;
+  height: 100%;
+  background-color: var(--bg-fhored);
+  border-start-end-radius: var(--radius-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl);
+}
+.login-page .left-section .title {
+  font-weight: 1000;
+  margin-bottom: var(--space-2xl);
+}
+.login-page .left-section form {
+  width: 400px;
+  flex-direction: column;
+  display: flex;
+  gap: var(--space-lg);
+}
+.login-page .left-section form .container-input {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--text-secondary);
+}
+.login-page .left-section form .container-input label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  position: absolute;
+  top: -6px;
+  left: 16px;
+  background-color: var(--bg-fhored);
+  padding: 0 10px;
+}
+.login-page .left-section form .container-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+.login-page .left-section form .container-input > img.password-eye {
+  width: 17px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  transition: .3s all ease;
+}
+.login-page .left-section form .container-input > img.password-eye:hover {
+  background-color: rgb(224, 222, 222);
+  border-radius: 50%;
+}
+.login-page .left-section form .button-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.login-page .left-section form .button-section button {
+  color: var(--text-main);
+  background-color: var(--btn-main);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--btn-main);
+}
+.login-page .left-section form .button-section button:hover {
+  color: var(--btn-text-hover);
+  background-color: var(--btn-hover);
+  transition: 0.2s all ease;
+}
+.login-page .left-section form .button-section .bottom-button-section > p {
+  font-size: 13px;
+  color: var(--text-secondary-op);
+}
+.login-page .left-section form .button-section .bottom-button-section > p span {
+  color: var(--text-primary-hover);
+  font-weight: 800;
+  text-decoration: underline;
+}
+.login-page
+  .left-section
+  form
+  .button-section
+  .bottom-button-section
+  > p
+  span:hover {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+/* right section */
+.login-page .right-section {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: center;
+  padding-top: 3%;
+
+  position: relative;
+  overflow: hidden;
+}
+.login-page .right-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+
+  background: linear-gradient(140deg, #5b55c9, #3f3aa3);
+
+  clip-path: polygon(0 0%, 0 100%, 100% 100%);
+}
+
+.login-page .right-section img {
+  width: 200px;
+  height: 200px;
+}
+.login-page .right-section h1 {
+  color: var(--text-main);
+}
+/* errors */
+.login-page .left-section form p.error {
+  margin-top: -30px;
+  font-size: 12px;
+  color: red;
+}

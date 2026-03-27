@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Reservation;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Event extends Model
 {
@@ -37,8 +40,14 @@ class Event extends Model
         ];
     }
 
-    public function dj(): BelongsTo
+    // Event.php
+    public function dj():BelongsTo
     {
-        return $this->belongsTo(Dj::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function reservations():HasMany
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

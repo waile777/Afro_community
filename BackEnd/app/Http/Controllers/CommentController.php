@@ -49,13 +49,13 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $comment = Comment::findOrFail($id);
         if ($comment->user_id !== Auth::id()) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
-        $commentUpdated = $comment->update($request->only([
+        $comment->update($request->only([
             'content'
         ]));
         return response()->json([

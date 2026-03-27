@@ -59,4 +59,8 @@ class User extends Authenticatable
     public function comments() {
         return $this->hasMany(Comment::class);
     }
+    public function djProfile() 
+    {
+        return $this->hasOne(DjProfile::class);
+    }
 }

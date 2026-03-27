@@ -49,7 +49,7 @@ class Mix extends Model
     // get Path Audio File to the frontend whtih Accessoire get + fieldName + Attribute
     public function getAudioFileAttribute($value)
     {
-        return asset('/storage' . $value);
+        return asset('storage/' . $value);
     }
 
     public function user(): BelongsTo

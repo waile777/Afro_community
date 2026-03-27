@@ -1,41 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\MixController;
 use App\Http\Controllers\MixLikesController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\PlaylistMixController;
-use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EventController;
 
 
-
-Route::post('/login', [AuthController::class, 'loginUser']);
-Route::post('/register', [AuthController::class, 'registerUser']);
+Route::post('/login', [UserController::class, 'loginUser']);
+Route::post('/register', [UserController::class, 'store']);
 
 
 // ROUTES NOT SECURE :
 Route::get('discover', [MixController::class, 'index']);
 Route::get('mix/{id}', [MixController::class, 'show']);
-
+Route::get('users', [UserController::class, 'index']);
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
 // GROUP ROUTES PROTECTED BY MIDDLEWARE :    
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    // Admin Panel
+    Route::delete('users/{id}', [UserController::class, 'destroy']);
 
-    // profile Route hahaha Auth Success
+
+
+
+    // User profile
     Route::get('profile', function (Request $request) {
-        return response()->json(['success', Auth::user()]);
+        return response()->json(['success', $request->user()]);
     });
-
+    Route::patch('profile', [UserController::class, 'update']);
 
     // Mixes
     Route::post('mix/upload', [MixController::class, 'store']);
     Route::patch('mix/{id}/play', [MixController::class, 'incrementPlays']);
-    Route::patch('mix/{id}/update', [MixController::class, 'update']);
+    Route::patch('mix/{id}', [MixController::class, 'update']);
     Route::delete('mix/{id}', [MixController::class, 'destroy']);
 
     // Likes
@@ -50,26 +57,28 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('mix/comment/{id}', [CommentController::class, 'destroy']);
 
     // Followers
-    Route::get('Followers' , [FollowController::class , 'index']);
-    Route::post('Dj/{id}/follow' , [FollowController::class , 'store']);
-    Route::get('Dj/{id}/is_following' , [FollowController::class , 'show']);
-    Route::delete('Dj/{id}/unfollow' , [FollowController::class , 'destroy']);
-    Route::get('profile/stats' , [FollowController::class , 'stats']);
+    Route::get('Followers', [FollowController::class, 'index']);
+    Route::post('Dj/{id}/follow', [FollowController::class, 'store']);
+    Route::get('Dj/{id}/is_following', [FollowController::class, 'show']);
+    Route::delete('Dj/{id}/unfollow', [FollowController::class, 'destroy']);
+    Route::get('profile/stats', [FollowController::class, 'stats']);
 
 
     // Playlists
-    Route::get('your_playlists' , [PlaylistController::class , 'index']);
-    Route::post('playlist/create' , [PlaylistController::class , 'store']);
-    Route::patch('your_playlists/playlist/{id}' , [PlaylistController::class , 'update']);
-    Route::delete('your_playlists/playlist/{id}' , [PlaylistController::class , 'destroy']);
-    
-    
+    Route::get('your_playlists', [PlaylistController::class, 'index']);
+    Route::post('playlist/create', [PlaylistController::class, 'store']);
+    Route::patch('your_playlists/playlist/{id}', [PlaylistController::class, 'update']);
+    Route::delete('your_playlists/playlist/{id}', [PlaylistController::class, 'destroy']);
+
+
     // PlaylistMix
-    Route::get('your_playlists/playlist/{id}/mixes' , [PlaylistMixController::class , 'index']);
-    Route::post('your_playlists/playlist/{playlist}/mix/{mix}/added' , [PlaylistMixController::class , 'store']);
-    Route::delete('your_playlists/playlist/{playlist}/mix/{mix}' , [PlaylistMixController::class , 'destroy']);
+    Route::get('your_playlists/playlist/{id}/mixes', [PlaylistMixController::class, 'index']);
+    Route::post('your_playlists/playlist/{playlist}/mix/{mix}/added', [PlaylistMixController::class, 'store']);
+    Route::delete('your_playlists/playlist/{playlist}/mix/{mix}', [PlaylistMixController::class, 'destroy']);
 
 
-
-    });
-    
+    // Events
+    Route::post('/events', [EventController::class, 'store']);
+    Route::patch('/events/{id}', [EventController::class, 'update']);
+    Route::delete('/events/{id}', [EventController::class, 'destroy']);
+});

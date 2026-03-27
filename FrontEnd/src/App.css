@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+:root {
+  /* colors */
+  --bg-main: #17152F;
+  --bg-gradient : #494395;
+  --bg-secondary: #232139;
+  --bg-third : #222039;
+  --bg-hover: #222222;
+  --bg-fhored : rgb(242, 240, 255);
+
+  --text-main: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-secondary-op: #828282;
+  --text-primary-hover: #5928E5;
+  --text-third : #FF320D;
+
+  --b-primary: #5928E5;
+  --b-primary-hover: #4F26C2;
+  --b-secondary-hover: #F3F3F3;
+
+
+  --border-color: #323047;
+  --color-links : #00AAFF;
+  
+
+  /* spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 22px;
+  --space-lg: 34px;
+  --space-xl: 42px;
+  --space-2xl: 70px;
+  --space-3xl: 102px;
+
+  /* radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 40px;
+
+  /* font sizes */
+  --text-xs: 22px;
+  --text-sm: 24px;
+  --text-md: 26px;
+  --text-lg: 30px;
+  --text-xl: 44px;
+  --text-2xl: 52px;
+
+  /* buttons */
+  --btn-main : #5928E5; 
+  --btn-hover : #F3F3F3;
+  --btn-text-hover :#5928E5;
+
+  /* links */
+  --link-hover :#8860f8;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Space Grotesk", sans-serif;
+}
+h1 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
