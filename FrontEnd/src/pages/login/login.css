@@ -72,6 +72,7 @@
   border-radius: 50%;
 }
 .login-page .left-section form .button-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -83,6 +84,34 @@
   border-radius: var(--radius-md);
   border: 2px solid var(--btn-main);
 }
+/* waiting icon button */
+.login-page .left-section form .button-section .waiting-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 3px solid var(--btn-main);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  pointer-events: none;
+  opacity: 0;
+}
+.login-page .left-section form .button-section .waiting-icon.waiting {
+  border-color: var(--text-secondary) ;
+  opacity: 1;
+}
+.login-page .left-section form .button-section button.waiting {
+  color: transparent;
+  cursor: not-allowed;
+  
+}
+.login-page .left-section form .button-section button.waiting:hover {
+  color: transparent;
+  background-color: var(--btn-main);
+}
+
 .login-page .left-section form .button-section button:hover {
   color: var(--btn-text-hover);
   background-color: var(--btn-hover);
