@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny' , User::class);
+        $this->authorize('viewAny', User::class);
         $users = User::with('djProfile')->get();
         return response()->json([
             'all_users' => $users
@@ -27,19 +27,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'profile_picture' => [
-                'image',
-                'mimes:jpg,png,jpeg,gif,svg',
+        $request->validate(
+            [
+                'first_name' => 'required|string|min:2|max:255',
+                'last_name' => 'required|string|min:2|max:255',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6',
+                'profile_picture' => [
+                    'image',
+                    'mimes:jpg,png,jpeg,gif,svg',
+                ],
+                'stage_name' => [
+                    'required_if:is_dj,1',
+                    'unique:dj_profiles,stage_name',
+                    'max:30',
+                    'min:2',
+                    'regex:/^[a-zA-Z0-9_-]+$/', // letters, numbers, underscore, dash only
+                ],
+                'bio' => 'nullable|string|min:10|max:200',
             ],
-            'stage_name' => 'nullable|string|max:100',
-            'bio' => 'nullable|string|max:1000',
-        ]);
-        $roleUser = $request->has('is_dj') ? User::ROLE_DJ : User::ROLE_LISTENER;
+            [
+                'email.unique' => 'This email is already in use', // <-- message
+                'stage_name.unique' => 'This stage name is already taken by another DJ',
+            ]
+        );
+        $roleUser = $request->is_dj ? User::ROLE_DJ : User::ROLE_LISTENER;
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
         } else {
@@ -173,6 +185,3 @@ class UserController extends Controller
         ]);
     }
 }
-
-
-
