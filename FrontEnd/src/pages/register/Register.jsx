@@ -2,6 +2,7 @@ import './register.css'
 import openEye from "../../assets/svgs/eye-open.svg"
 import closeEye from "../../assets/svgs/eye-close.svg"
 import logoWithName from "../../assets/logo/logo_with_name.svg"
+import defaultProfilePicture from "../../assets/profile_picture/default_profile.png"
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../api.js'
@@ -19,8 +20,8 @@ function Register() {
     isDj: false,
     stageName: null,
     bio: null,
-    confirmationTerms: false
-
+    confirmationTerms: false,
+    profilePicture: null
   })
   const handleConfirmationTerms = () => {
     setInfoRegister((older) => {
@@ -48,6 +49,23 @@ function Register() {
       }
     })
   }
+  const handleProfilePicture = (e) => {
+    const file = e.target.files[0]
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setInfoRegister((infos) => {
+          return {
+            ...infos,
+            profilePicture : reader.result
+          }
+        })
+      }
+      reader.readAsDataURL(file)
+    }
+
+
+  }
 
 
 
@@ -60,7 +78,13 @@ function Register() {
       </div>
       <div className="right-section">
         <div className='register-container'>
-          <h2 className="title">Create Account</h2>
+          <div className="container-profile-title">
+            <h2 className="title">Create Account</h2>
+            <div className="container-profile">
+              <img src={!infoRegister.profilePicture ? defaultProfilePicture : infoRegister.profilePicture} alt="profile_picture" />
+              <input type="file" name="profile_picture" onChange={(e) => handleProfilePicture(e)} />
+            </div>
+          </div>
           <form action="" method="POST" className="register-form">
             <div className='full-name-section'>
               <div className="container-input first-name">
