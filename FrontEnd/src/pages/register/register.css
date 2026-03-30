@@ -1,0 +1,423 @@
+.register-page {
+  display: flex;
+  align-items: flex-start;
+  background: linear-gradient(
+    160deg,
+    var(--bg-main) 0%,
+    #14143a 40%,
+    #060624 100%
+  );
+  height: 100vh;
+}
+
+.register-page .right-section {
+  position: relative;
+  width: 70%;
+  height: 100%;
+  background-color: var(--bg-fhored);
+  border-start-start-radius: var(--radius-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-3xl);
+}
+.register-page .right-section .register-container .container-profile-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+}
+/* title */
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .title {
+  font-weight: 1000;
+}
+/* container profile */
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .container-profile {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  user-select: none;
+}
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .container-profile
+  img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  box-shadow: 2px 2px 12px rgba(128, 128, 128, 0.087);
+  transition: 0.4s all linear;
+}
+
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .container-profile
+  > input {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .container-profile
+  .label-profile-picture {
+  background-color: var(--btn-main);
+  color: var(--text-main);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10%;
+  padding: 9px 15px;
+  font-size: var(--text-xss);
+  text-transform: uppercase;
+  width: 160px;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  position: absolute;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.3s all linear;
+  font-weight: 700;
+}
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .container-profile
+  .label-profile-picture:hover {
+  color: var(--btn-text-hover);
+  background-color: var(--btn-hover);
+  border-color: var(--btn-main);
+}
+.register-page
+  .right-section
+  .register-container
+  .container-profile-title
+  .container-profile
+  .label-profile-picture:active {
+  border-color: rgba(255, 255, 255, 0.364);
+}
+
+/* form register */
+.register-page .right-section .register-container form {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+.register-page .right-section .register-container form .double-inputs-section {
+  display: flex;
+  gap: var(--space-xl);
+}
+/* container input */
+.register-page .right-section .register-container form .container-input {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--text-secondary);
+}
+.register-page .right-section .register-container form .container-input label {
+  color: var(--text-secondary-op);
+  font-size: 12px;
+  position: absolute;
+  top: -6px;
+  left: 16px;
+  background-color: var(--bg-fhored);
+  padding: 0 10px;
+}
+.register-page .right-section .register-container form .container-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+/* password eye */
+.register-page
+  .right-section
+  .register-container
+  form
+  .container-input
+  > img.password-eye {
+  width: 17px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  transition: 0.3s all ease;
+}
+.register-page
+  .right-section
+  .register-container
+  form
+  .container-input
+  > img.password-eye:hover {
+  background-color: rgb(224, 222, 222);
+  border-radius: 50%;
+}
+
+/* dj Section */
+.register-page .right-section .register-container form .dj-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.register-page .right-section .register-container form .dj-section .check-dj {
+  display: flex;
+  gap: var(--space-xs);
+}
+/* checkbox input */
+.register-page
+  .right-section
+  .register-container
+  form
+  .dj-section
+  .check-dj
+  > input {
+}
+.register-page .right-section .register-container form .dj-section .question-dj,
+.register-page
+  .right-section
+  .register-container
+  form
+  .dj-section
+  .accept-conditions {
+  font-size: var(--text-xss);
+  color: var(--text-black);
+}
+.register-page
+  .right-section
+  .register-container
+  form
+  .dj-section
+  .accept-conditions
+  > span {
+  text-decoration: underline;
+}
+
+/* info dj  */
+.register-page .right-section .register-container form .dj-section .info-dj {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+/* button section */
+.register-page .right-section form .button-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.register-page .right-section form .button-section button {
+  color: var(--text-main);
+  background-color: var(--btn-main);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--btn-main);
+}
+.register-page .right-section form .button-section .waiting-icon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 3px solid var(--btn-main);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  pointer-events: none;
+  opacity: 0;
+}
+.register-page .right-section form .button-section .waiting-icon.waiting {
+  border-color: var(--text-secondary);
+  opacity: 1;
+}
+.register-page .right-section form .button-section button.waiting {
+  color: transparent;
+  cursor: not-allowed;
+}
+.register-page .right-section form .button-section button.waiting:hover {
+  color: transparent;
+  background-color: var(--btn-main);
+  cursor: not-allowed;
+}
+.register-page .right-section form .button-section button:hover {
+  color: var(--btn-text-hover);
+  background-color: var(--btn-hover);
+  transition: 0.2s all ease;
+  cursor: pointer;
+}
+
+/* bottom button  */
+.register-page .right-section form .button-section .bottom-button-section {
+  display: flex;
+  flex-direction: flex-start;
+  gap: var(--space-xl);
+}
+.register-page
+  .right-section
+  form
+  .button-section
+  .bottom-button-section
+  .left {
+  display: flex;
+  flex-direction: column;
+}
+.register-page
+  .right-section
+  form
+  .button-section
+  .bottom-button-section
+  .left
+  .confiramtion-section {
+  display: flex;
+  gap: var(--space-xs);
+}
+.register-page
+  .right-section
+  form
+  .button-section
+  .bottom-button-section
+  .left
+  .confiramtion-section
+  > p {
+  font-size: var(--text-xss);
+  color: var(--text-black);
+}
+.register-page
+  .right-section
+  form
+  .button-section
+  .bottom-button-section
+  .right
+  > p {
+  font-size: var(--text-xss);
+  color: var(--text-black);
+}
+.register-page
+  .right-section
+  form
+  .button-section
+  .bottom-button-section
+  .right
+  > p
+  span {
+  color: var(--link-hover);
+  font-weight: 700;
+  margin-left: var(--space-xs);
+  cursor: pointer;
+}
+.register-page
+  .right-section
+  form
+  .button-section
+  .bottom-button-section
+  .right
+  > p
+  span:hover {
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+.register-page .right-section .link-terms {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* right section */
+.register-page .left-section {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: center;
+  padding-top: 3%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.register-page .left-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+
+  background: linear-gradient(140deg, #5b55c9, #3f3aa3);
+  clip-path: polygon(100% 0%, 0 100%, 100% 100%);
+}
+
+.register-page .left-section img {
+  width: 200px;
+  height: 200px;
+}
+.register-page .left-section h1 {
+  color: var(--text-main);
+}
+/* errors */
+.register-page .right-section form p.error {
+  font-size: 12px;
+  color: red;
+  margin-top: 3px;
+}
+.register-page .right-section form .bio p.error {
+  margin-top: 15px;
+}
+
+/* stage name and bio */
+
+.register-page .right-section .register-container form .dj-section .info-dj .stage-name {
+  width: 40%;
+}
+.register-page .right-section .register-container form .dj-section .info-dj .bio {
+  padding: var(--space-sm);
+  height: 100px;
+}
+.register-page .right-section .register-container form .dj-section .info-dj .bio textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  resize: none;
+}
+
+/* count bio */
+.register-page .right-section .register-container form .dj-section .info-dj .bio .count {
+  font-size: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

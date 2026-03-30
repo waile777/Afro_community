@@ -26,7 +26,7 @@
   margin-bottom: var(--space-2xl);
 }
 .login-page .left-section form {
-  width: 400px;
+  width: 500px;
   flex-direction: column;
   display: flex;
   gap: var(--space-lg);
@@ -40,7 +40,7 @@
   border: 1px solid var(--text-secondary);
 }
 .login-page .left-section form .container-input label {
-  color: var(--text-secondary);
+  color: var(--text-secondary-op);
   font-size: 12px;
   position: absolute;
   top: -6px;
@@ -119,10 +119,10 @@
 }
 .login-page .left-section form .button-section .bottom-button-section > p {
   font-size: 13px;
-  color: var(--text-secondary-op);
+  color: var(--text-black);
 }
 .login-page .left-section form .button-section .bottom-button-section > p span {
-  color: var(--text-primary-hover);
+  color: var(--link-hover);
   font-weight: 800;
   text-decoration: underline;
 }
@@ -146,7 +146,6 @@
   gap: var(--space-xs);
   align-items: center;
   padding-top: 3%;
-
   position: relative;
   overflow: hidden;
 }
@@ -176,3 +175,6 @@
   font-size: 12px;
   color: red;
 }
+
+
+
