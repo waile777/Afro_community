@@ -210,7 +210,7 @@
   .dj-section
   .accept-conditions {
   font-size: var(--text-xss);
-  color: var(--text-black);
+  color: var(--text-secondary-op);
 }
 .register-page
   .right-section
@@ -311,7 +311,7 @@
   .confiramtion-section
   > p {
   font-size: var(--text-xss);
-  color: var(--text-black);
+  color: var(--text-secondary-op);
 }
 .register-page
   .right-section
@@ -420,4 +420,19 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+
+/* svg dj */
+.register-page .svg-dj {
+  width: 20px;
+  height: 20px;
+
+}
+.register-page .dj-section-svg {
+  position: relative;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-secondary);
 }

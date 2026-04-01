@@ -1,0 +1,199 @@
+.home {
+  width: var(--width-laptop);
+  margin: 0 auto;
+  position: relative;
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+.home header {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  position: relative;
+  border-radius: var(--radius-lg);
+}
+.home header > *:not(img) {
+  padding: var(--space-md);
+}
+.home header > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  z-index: -1;
+  object-fit: cover;
+  object-position: top bottom;
+}
+.home header .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home header .top > img {
+  width: 35px;
+}
+.home header .top .top-right {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+/* all buttons */
+.home header .top .top-right > button,
+.home header .bottom > button,
+.home .search-bar-container > button.upload,
+.home .container-event > button ,
+.home .thanks-container > button{
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-weight: bold;
+  transition: 0.2s all ease;
+}
+.home header .top .top-right button:first-child {
+  background-color: var(--btn-main);
+  color: var(--text-main);
+}
+.home header .top .top-right > button:hover,
+.home header .bottom > button:hover,
+.home .search-bar-container > button.upload:hover,
+.home .container-event > button:hover ,
+.home .thanks-container > button:hover {
+  color: var(--text-secondary-op);
+}
+
+/* center */
+.home header .center {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.home header .center .title {
+  color: var(--text-main);
+  font-weight: bold;
+}
+.home header .center .title > span {
+  text-decoration: underline;
+}
+.home header .center .description {
+  font-size: var(--text-xxs);
+  width: 600px;
+}
+
+/* search bar section */
+.home .search-bar-container {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  align-self: center;
+}
+.home .search-bar-container .input-container {
+  position: relative;
+  width: 600px;
+  height: 40px;
+}
+.home .search-bar-container .input-container > input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: var(--input-padding);
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  background-color: var(--border-color);
+  color: var(--text-main);
+  transition: .3s all ease;
+}
+.home .search-bar-container .input-container > input:focus {
+    border-color: var(--text-secondary-op);
+}
+.home .search-bar-container .input-container > input::placeholder {
+  color: var(--text-secondary-op);
+  font-size: var(--text-xss);
+}
+.home .search-bar-container .input-container > i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  color: var(--text-secondary-op);
+  cursor: pointer;
+}
+.home .search-bar-container > span {
+  color: var(--text-main);
+}
+
+/* container event */
+.home .container-event {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-image: linear-gradient(to top , #17152feb 40% , transparent);
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--space-md); */
+}
+.home .container-event > *:not(img) {
+  margin-left: var(--space-md);
+  margin-top: var(--space-md);
+}
+.home .container-event > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  z-index: -1;
+  object-fit: cover;
+  object-position: bottom;
+}
+.home .container-event > p.description {
+  font-size: var(--text-xxs);
+  width: 600px;
+}
+.home .container-event .title {
+  color: var(--text-main);
+}
+.home .container-event.events-empty > button {
+    width: fit-content;
+}
+
+/* thnanks container for guest */
+.home .thanks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.home .thanks-container > h3.title {
+    color: var(--text-main);
+}
+.home .thanks-container > p {
+    font-size: var(--text-xxs);
+    color: var(--text-main);
+}
+.home .thanks-container > .login-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.home .thanks-container > .login-section > p {
+    font-size: var(--text-xss);
+}
+.home .thanks-container > .login-section > a {
+    font-size: var(--text-xss);
+    color: var(--text-main);
+    font-weight: bold;
+    text-decoration: none;
+}
+.home .thanks-container > .login-section > a:hover {
+    color: var(--text-secondary-op);
+}
+.home .thanks-container > button {
+    background-color: var(--btn-main);
+    color: var(--text-main);
+    
+}
+.home .thanks-container > button:hover {
+    padding-left: 10px;
+}

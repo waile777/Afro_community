@@ -1,0 +1,33 @@
+.discover {
+  width: var(--width-laptop);
+  margin: 0 auto;
+  position: relative;
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.discover header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.discover header img.left-section {
+    width: 30px;
+} 
+.discover header .right-section {
+    display: flex;
+    gap: var(--space-sm);
+}
+.discover header .right-section .profile-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+.discover header .right-section .profile-section {}
+.discover header .right-section .profile-section > img {
+    width: 40px;
+    background-color: red;
+    border-radius: 50%;
+}

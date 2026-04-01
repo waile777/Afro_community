@@ -1,5 +1,6 @@
 import './register.css'
 import openEye from "../../assets/svgs/eye-open.svg"
+import svgDj from "../../assets/svgs/svgDj.svg"
 import closeEye from "../../assets/svgs/eye-close.svg"
 import logoWithName from "../../assets/logo/logo_with_name.svg"
 import defaultprofile_picture from "../../assets/profile_picture/default_profile.jpg"
@@ -130,7 +131,7 @@ function Register() {
         }));
         setStatePage('error');
         console.log(backendErrors);
-        
+
       }
     }
   };
@@ -186,7 +187,10 @@ function Register() {
             </div>
 
             <div className="dj-section">
-              <p className="question-dj"><b>T|T </b> Are You Dj?</p>
+              <div className="dj-section-svg">
+                <img src={svgDj} className="svg-dj" />
+                <p className="question-dj">Are You Dj?</p>
+              </div>
               <div className="check-dj">
                 <input type="checkbox" onChange={() => handleDjContent()} checked={infoRegister.is_dj ? true : false} name='is_dj' />
                 <p className="accept-conditions">

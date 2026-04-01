@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 :root {
+  --width-laptop : 1240px;
   /* colors */
   --bg-main: #17152F;
   --bg-gradient : #494395;
@@ -21,6 +22,7 @@
 
 
   --border-color: #323047;
+  --input-padding: 10px 20px;
   --color-links : #00AAFF;
   
 
@@ -42,6 +44,7 @@
 
   /* font sizes */
   --text-xss: 13px;
+  --text-xxs: 17px;
   --text-xs: 22px;
   --text-sm: 24px;
   --text-md: 26px;
@@ -82,3 +85,6 @@ p {
   color: var(--text-secondary);
 }
 
+body {
+  background-color: var(--bg-main);
+}
