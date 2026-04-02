@@ -12,12 +12,13 @@
   --text-main: #ffffff;
   --text-secondary: #b3b3b3;
   --text-secondary-op: #828282;
+  --text-secondary-op2 :  rgba(128, 128, 128, 0.072);
   --text-primary-hover: #5928E5;
   --text-third : #FF320D;
   --text-black : black;
 
   --b-primary: #5928E5;
-  --b-primary-hover: #4F26C2;
+  --b-primary-hover: #3c1d93;
   --b-secondary-hover: #F3F3F3;
 
 

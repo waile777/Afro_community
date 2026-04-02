@@ -1,10 +1,12 @@
 import "./dropDownProfile.css"
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import React from 'react'
 
 function DropDownProfile() {
     const user = JSON.parse(localStorage.getItem('user'))
+    const navigate = useNavigate()
 
     const links = [
         {
@@ -71,18 +73,18 @@ function DropDownProfile() {
 
 
     return (
-        <ul className="drop-down">
+        <>
             {
                 filteredLinks.map(link => {
                     return (
-                        <li key = {link._id}>
+                        <li key={link._id} onClick={() => navigate(link.to)}>
                             {link.icon}
                             <Link to={link.to} className="drop-down-link">{link.label}</Link>
                         </li>
                     )
                 })
             }
-        </ul>
+        </>
     )
 }
 
