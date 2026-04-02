@@ -6,7 +6,7 @@ function Navlinks() {
     const [linkSelected, setLinkSelected] = useState('Home')
     const user = JSON.parse(localStorage.getItem('user'));
     const links = [
-        { label: "Home", to: "/" },
+        { label: "Home", to: "/discover" },
         { label: "Events", to: "/events" },
 
         { label: "Upload", to: "/upload", roles: ["dj"] },
@@ -46,7 +46,7 @@ function Navlinks() {
         <nav className="nav-links">
             {
                 filteredLinks.map((link, i) => {
-                    return <Link className={`link ${link.label === linkSelected ? ' active' : ''}`} onClick={() => setLinkSelected(link.label)} key={i} to={link.to}>{link.label}</Link>
+                    return <Link className={`link ${link.label === linkSelected ? ' clicked' : ''}`} onClick={() => setLinkSelected(link.label)} key={i} to="#">{link.label}</Link>
                 })
             }
         </nav>

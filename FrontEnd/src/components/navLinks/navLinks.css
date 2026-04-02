@@ -1,0 +1,29 @@
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+}
+.nav-links > .link {
+  color: var(--text-secondary-op);
+  text-decoration: none;
+  transition: 0.2s all ease;
+  position: relative;
+}
+.nav-links > .link:hover {
+  color: var(--text-main);
+}
+.nav-links > .link.clicked {
+  color: var(--text-main);
+}
+.nav-links > .link::before {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background-color: var(--text-main);
+  bottom: -3px;
+  transition: 0.2s all ease;
+}
+.nav-links > .link.clicked::before {
+  color: var(--text-main);
+  width: 50%;
+}

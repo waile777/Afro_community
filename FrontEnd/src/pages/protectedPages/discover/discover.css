@@ -9,25 +9,279 @@
 }
 
 .discover header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .discover header img.left-section {
-    width: 30px;
-} 
+  width: 25px;
+  cursor: pointer;
+}
 .discover header .right-section {
-    display: flex;
-    gap: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
 }
 .discover header .right-section .profile-section {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
 }
-.discover header .right-section .profile-section {}
+.discover header .right-section .profile-section > i,
+.discover header .other-section .notif-section > i,
+.discover header .other-section .other-options > i {
+  color: var(--text-secondary-op);
+  transition: 0.2s all linear;
+  cursor: pointer;
+}
+.discover header .right-section .profile-section > i:hover,
+.discover header .other-section .notif-section > i:hover,
+.discover header .other-section .other-options > i:hover {
+  color: var(--text-main);
+}
+.discover header .right-section .profile-section > i.clicked,
+.discover header .other-section .notif-section > i.clicked,
+.discover header .other-section .other-options > i.clicked {
+  color: var(--text-main);
+}
 .discover header .right-section .profile-section > img {
-    width: 40px;
-    background-color: red;
-    border-radius: 50%;
+  width: 30px;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.discover header .other-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary-op);
+}
+
+/* main */
+.discover main.main-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.discover main.main-section section.top-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  margin-top: var(--space-2xl);
+}
+.discover main.main-section section.top-section .title {
+  font-weight: 1000;
+  color: var(--text-main);
+}
+.discover main.main-section section.top-section .title span.name-user {
+  color: var(--color-links);
+}
+
+/* search bar */
+.discover main.main-section section.top-section .container-search-bar {
+  position: relative;
+  width: 70%;
+  height: 200px;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  background-color: var(--bg-secondary);
+  transition: 0.3s all ease-in;
+}
+/* input search query */
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > textarea {
+  width: 100%;
+  height: 70%;
+  border-radius: inherit;
+  outline: none;
+  padding: var(--space-lg);
+  background-color: transparent;
+  resize: none;
+  border-color: transparent;
+  transition: 0.2s all linear;
+  color: var(--text-main);
+  transition: 0.3s all ease-in;
+  overflow: hidden;
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > textarea:focus {
+  border-color: var(--text-secondary-op);
+}
+
+.discover main.main-section section.top-section .container-search-bar > i {
+  position: absolute;
+  color: var(--text-secondary-op);
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > i.arrows-angle {
+  right: 10px;
+  top: 10px;
+  font-size: 13px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s all linear;
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.072);
+  border-radius: 50%;
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > i.bi-search {
+  top: 2%;
+  left: 1%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s all linear;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s all ease-in;
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > i.bi-search:hover,
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > i.arrows-angle:hover,
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  > i.arrows-angle.expanded {
+  background-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* bottom search input */
+
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  .bottom-search-input {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  background-color: var(--border-color);
+  padding-left: var(--space-lg);
+  transition: 0.3s all ease-in;
+}
+
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  .bottom-search-input
+  > button {
+  opacity: 1;
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-weight: bold;
+  transition: 0.3s all ease;
+  background-color: var(--btn-main);
+  color: var(--text-main);
+  font-size: 10px;
+  transition-delay: 0.2s; 
+}
+@keyframes animateButtons {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  .bottom-search-input
+  > button
+  > i {
+  margin-left: var(--space-xl);
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar
+  .bottom-search-input
+  > button:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-text-hover);
+}
+
+/* expanded search bar effect */
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar.expanded-search-bar {
+  height: 50px;
+}
+
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar.expanded-search-bar
+  > textarea {
+  padding: var(--space-sm) var(--space-2xl);
+  border-color: transparent;
+}
+
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar.expanded-search-bar
+  > .bottom-search-input {
+  height: 3%;
+  border: none;
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar.expanded-search-bar:focus-within
+  > .bottom-search-input {
+  background-color: var(--text-secondary-op);
+}
+.discover
+  main.main-section
+  section.top-section
+  .container-search-bar.expanded-search-bar
+  > .bottom-search-input
+  > button {
+  opacity: 0;
+  pointer-events: none;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
