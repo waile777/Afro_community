@@ -1,0 +1,164 @@
+.mix {
+  position: relative;
+  padding: var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xss);
+  align-items: center;
+  border: 2px solid var(--text-secondary-op2);
+  border-top-left-radius: var(--radius-2xl);
+  border-top-right-radius: var(--radius-2xl);
+  border-bottom-right-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+}
+.mix.current {
+  border-color: var(--bg-style);
+  box-shadow:  0px 1px 2px lime;
+}
+.mix .my-mix {
+  position: absolute;
+  background-color: var(--bg-gradient);
+  color: var(--text-main);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 10px;
+  left: 1%;
+  top: 4%;
+  transform: rotate(-45deg);
+  border: 1px solid var(--btn-hover);
+}
+.mix .container-image {
+  margin-bottom: var(--space-xs);
+}
+.mix .container-image > img ,
+.mix > .title ,
+.mix > .length-mix,
+.mix > .bottom-title .genre {
+  user-select: none;
+}
+.mix .container-image > .edit-my-mix {
+  opacity: 0;
+  transition: .2s all linear;
+  font-size: 11px;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  z-index: 999;
+  background-color: var(--text-main);
+  padding: var(--space-xs) var(--space-sm);
+  font-weight: bold;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.mix .container-image:hover > .edit-my-mix {
+  opacity: 1;
+}
+.mix .container-image > .edit-my-mix > i {
+  margin-right: var(--space-xs);
+}
+.mix .container-image > .edit-my-mix:hover {
+  color: var(--text-secondary-op);
+}
+.mix .container-image > img.cover-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-top-left-radius: var(--radius-2xl);
+  border-top-right-radius: var(--radius-2xl);
+  border-bottom-right-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+  object-fit: cover;
+  background-color: red;
+}
+.mix > .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: var(--text-main);
+  font-weight: bold;
+  align-self: flex-start;
+  text-transform: capitalize;
+}
+.mix > .bottom-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.mix > .bottom-title .genre {
+  font-size: var(--text-xss);
+  text-transform: capitalize;
+  color: var(--text-secondary-op);
+}
+.mix > .bottom-title .stage-name {
+  font-size: var(--text-xss);
+  border-bottom: 1px solid var(--text-secondary-op);
+  border-radius: 5px;
+  padding: 0px var(--space-xs);
+  cursor: pointer;
+  transition: .2s all linear;
+}
+.mix > .bottom-title .stage-name:hover {
+  border-color: var(--text-main);
+  color: var(--text-main);
+}
+.mix > .length-mix {
+  align-self: flex-start;
+  font-size: var(--text-xss);
+  color: var(--text-secondary-op);
+}
+.mix > .line {
+  width: 40%;
+  height: 1px;
+  background-color: var(--text-secondary-op2);
+  align-self: flex-start;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+.mix .bottom-mix {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.mix .bottom-mix .play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-image: linear-gradient(var(--btn-main), var(--bg-gradient));
+  border: none;
+  transition: 0.3s all ease;
+}
+.mix .bottom-mix .play-button:hover {
+  background-image: linear-gradient(var(--btn-main), var(--bg-secondary));
+}
+.mix .bottom-mix .play-button > i {
+  color: var(--text-main);
+  font-size: var(--text-lg);
+  padding: var(--space-xs);
+}
+
+.mix .bottom-mix > .right-section {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+}
+.mix .bottom-mix > .right-section > i {
+  font-size: var(--text-xss);
+  padding: var(--space-xs);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary-op);
+  cursor: pointer;
+}
+.mix .bottom-mix > .right-section > i:hover {
+  background-color: var(--text-secondary-op2);
+}
+.mix .bottom-mix > .right-section > i.active {
+  color: var(--text-main);
+}
+

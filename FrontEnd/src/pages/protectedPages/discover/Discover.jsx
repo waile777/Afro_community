@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import DropDownProfile from '../../../components/dropDownProfile/DropDownProfile'
 
+// import Data Main
+import RecentlyPlayed from "../../../components/recentlyPlayed/RecentlyPlayed"
+import MoreOfWhatYouLike from "../../../components/moreOfWhatYouLike/MoreOfWhatYouLike"
+
 function Discover() {
   const user = JSON.parse(localStorage.getItem('user'));
   const maxValuesBPM = 3;
@@ -23,12 +27,22 @@ function Discover() {
     'expandedSearch': false
   })
   const [genres, setGenres] = useState([])
+
   const [infoSelectedSearchQuery, setInfoSelectedSearchQuery] = useState({
     'bpm': 'all',
     'type': 'all',
     'inputBPM': '',
     'errorBPM': ''
   })
+
+
+
+
+
+
+
+
+
   // handle indo selected search query
   const handleInfoSelectedSearchQuery = (e) => {
     const name = e.currentTarget.getAttribute('name')
@@ -202,7 +216,7 @@ function Discover() {
       <header>
         <img onClick={() => navigate('/discover')} src={logoWithoutName} className="left-section" alt="logo Afro Community" />
         {
-          dropDown.profile && <ul ref={profileRef} className = "drop-down-profile"><DropDownProfile /></ul>
+          dropDown.profile && <ul ref={profileRef} className="drop-down drop-down-profile"><DropDownProfile /></ul>
         }
         <NavLinks className="center-section" />
         <div className="right-section">
@@ -233,7 +247,7 @@ function Discover() {
             <textarea maxLength="80" type="text" name="searchInput" placeholder="search for Dj, Mixes..." />
             <div className="bottom-search-input">
               {dropDown.type && dropDown.expandedSearch && (
-                <ul className="drop-down-type" ref={typeRef}>
+                <ul className="drop-down drop-down-type" ref={typeRef}>
                   {
                     genres.map(genre => {
                       return <li key={genre}
@@ -246,7 +260,7 @@ function Discover() {
               )}
               {
                 dropDown.bpm && dropDown.expandedSearch && (
-                  <form ref={bpmRef} name="bpm" onSubmit={handleSubmitBPM} className="drop-down-bpm">
+                  <form ref={bpmRef} name="bpm" onSubmit={handleSubmitBPM} className="drop-down drop-down-bpm">
                     <div className="container-input">
                       <input value={infoSelectedSearchQuery.inputBPM} type="text" name="inputBPM" onChange={handleChangeInput} placeholder="Enter int value from 100 to 150" />
                     </div>
@@ -300,7 +314,15 @@ function Discover() {
           </div>
         </section>
         <section className="middle-section">
-          
+          <section className="left-section-in-middle">
+            <div className="container-mixes recently-mixes">
+              <RecentlyPlayed />
+            </div>
+            <div className="container-mixes more-of-what-you-like">
+              <MoreOfWhatYouLike />
+            </div>
+          </section>
+          <section className="right-section-in-middle"></section>
         </section>
       </main>
     </div >

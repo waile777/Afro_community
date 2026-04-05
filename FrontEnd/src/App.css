@@ -3,11 +3,12 @@
   --width-laptop : 1240px;
   /* colors */
   --bg-main: #17152F;
-  --bg-gradient : #494395;
+  --bg-gradient : #3429c7;
   --bg-secondary: #232139;
   --bg-third : #222039;
   --bg-hover: #222222;
   --bg-fhored : rgb(242, 240, 255);
+  --bg-style : rgb(255, 213, 0);
 
   --text-main: #ffffff;
   --text-secondary: #b3b3b3;
@@ -35,6 +36,7 @@
   --space-xl: 42px;
   --space-2xl: 70px;
   --space-3xl: 102px;
+  --space-4xl: 122px;
 
   /* radius */
   --radius-sm: 6px;
@@ -88,4 +90,7 @@ p {
 
 body {
   background-color: var(--bg-main);
+}
+.drop-down {
+  z-index: 999;
 }
