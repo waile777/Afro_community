@@ -162,7 +162,7 @@ class UserController extends Controller
         ])) {
             return response()->json(['error' => 'invalide cridentials'], 401);
         }
-        $user = User::where('email', $request->email)->first(); // {'id' : 1 , email : $request->email...} | null 
+        $user = User::where('email', $request->email)->firstOrFail(); // {'id' : 1 , email : $request->email...} | null 
         $token = $user->createToken('AUTH_TOKEN')->plainTextToken;
 
         return response()->json([
