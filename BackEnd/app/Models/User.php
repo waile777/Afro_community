@@ -44,6 +44,7 @@ class User extends Authenticatable
     {
         return [
             'id' => 'integer',
+            'password'=>'hashed'
         ];
     }
     // ROLE_CONSTANT:

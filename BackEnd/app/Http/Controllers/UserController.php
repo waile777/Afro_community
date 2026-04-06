@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\DjProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,47 +23,24 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate(
-            [
-                'first_name' => 'required|string|min:2|max:255',
-                'last_name' => 'required|string|min:2|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6',
-                'profile_picture' => [
-                    'image',
-                    'mimes:jpg,png,jpeg,gif,svg',
-                ],
-                'stage_name' => [
-                    'required_if:is_dj,1',
-                    'unique:dj_profiles,stage_name',
-                    'max:30',
-                    'min:2',
-                    'regex:/^[a-zA-Z0-9_-]+$/', // letters, numbers, underscore, dash only
-                ],
-                'bio' => 'nullable|string|min:10|max:200',
-            ],
-            [
-                'email.unique' => 'This email is already in use', // <-- message
-                'stage_name.unique' => 'This stage name is already taken by another DJ',
-            ]
-        );
+    
+    public function store(StoreUserRequest $request)
+    {   
+
+        $data = $request->validated();
+        
         $roleUser = $request->is_dj ? User::ROLE_DJ : User::ROLE_LISTENER;
-        if ($request->hasFile('profile_picture')) {
+        if($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
         } else {
             $path = 'profile_pictures/default_profile.png';
         }
 
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => HASH::make($request->password),
+            'first_name' => $data['first_name'] ?? null,
+            'last_name' => $data['last_name'],
+            'email' =>$data['email'],
+            'password' => HASH::make($data['password']),
             'role' => $roleUser,
             'profile_picture' => $path
         ]);
