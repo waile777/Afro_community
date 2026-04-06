@@ -1,0 +1,31 @@
+
+.djs-should-follow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+
+}
+.djs-should-follow > .top-section  {
+    display: flex;
+    justify-content: space-between;
+
+}
+.djs-should-follow > .top-section .title {
+    color: var(--text-main);
+}
+.djs-should-follow > .top-section > p.others{
+    text-transform: uppercase;
+    font-size: 11px;
+    cursor: pointer;
+    transition: .2s all ease;
+    color: var(--text-secondary-op);
+}
+.djs-should-follow > .top-section > p.others:hover {
+    color: var(--text-main);
+}
+.djs-should-follow > .djs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    
+}

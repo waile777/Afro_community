@@ -14,7 +14,7 @@ class MixController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny' , Mix::class);
+        $this->authorize('viewAny', Mix::class);
         $collectionMixes = Mix::with('user')->latest()->get();
         return response()->json([
             'mixes_with_users' => $collectionMixes
@@ -27,7 +27,7 @@ class MixController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create' , Mix::class);  //Authorize the user to create Mixes should be a dj
+        $this->authorize('create', Mix::class);  //Authorize the user to create Mixes should be a dj
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -70,7 +70,7 @@ class MixController extends Controller
     public function update(Request $request, $id)
     {
         $mix = Mix::findOrFail($id);
-        $this->authorize('update' , $mix);
+        $this->authorize('update', $mix);
         $mixUpdated = $mix->update($request->only([
             'title',
             'description',
@@ -81,7 +81,7 @@ class MixController extends Controller
         ]));
 
         return response()->json([
-            'MixUpdated' => $mixUpdated 
+            'MixUpdated' => $mixUpdated
         ]);
     }
 
@@ -91,7 +91,7 @@ class MixController extends Controller
     public function destroy($id)
     {
         $mix = Mix::findOrFail($id);
-        $this->authorize('delete' , $mix);
+        $this->authorize('delete', $mix);
         $mix->delete();
         return response()->json(['message' => 'mix deleted successfuly']);
     }
@@ -104,4 +104,12 @@ class MixController extends Controller
             'plays' => $mix->view_count
         ]);
     }
+
+    public  function getGenres()
+    {
+        return  response()->json([
+            'genres' => Mix::genres()
+        ]);
+    }
+
 }

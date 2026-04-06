@@ -82,9 +82,14 @@ h2 {
 h3 {
   font-size: var(--text-lg);
 }
-
+h4 {
+  font-size: var(--text-md);
+}
+h5 {
+  font-size: var(--text-xxs);
+}
 p {
-  font-size: var(--text-sm);
+  font-size: var(--text-xss);
   color: var(--text-secondary);
 }
 

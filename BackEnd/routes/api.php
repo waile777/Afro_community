@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\djProfileController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\MixController;
 use App\Http\Controllers\MixLikesController;
@@ -11,20 +12,29 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EventController;
-
+use App\Http\Controllers\RecentlyPlayedController;
+use App\Models\DjProfile;
+use App\Models\MixLike;
+use Illuminate\Http\Notification\VerificationRequiredNotification;
 
 Route::post('/login', [UserController::class, 'loginUser']);
 Route::post('/register', [UserController::class, 'store']);
+Route::get('/genres', [MixController::class, 'getGenres']);
 
+Route::get('/test', function () {
+    return response()->json([
+        "message" => "API works"
+    ]);
+});
 
 // ROUTES NOT SECURE :
-Route::get('discover', [MixController::class, 'index']);
+Route::get('/mixes', [MixController::class, 'index']);
 Route::get('mix/{id}', [MixController::class, 'show']);
 Route::get('users', [UserController::class, 'index']);
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/{id}', [EventController::class, 'show']);
-// GROUP ROUTES PROTECTED BY MIDDLEWARE :    
 
+// GROUP ROUTES PROTECTED BY MIDDLEWARE :    
 Route::middleware('auth:sanctum')->group(function () {
 
     // Admin Panel
@@ -34,16 +44,20 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // User profile
-    Route::get('profile', function (Request $request) {
+    Route::get('/discover', function (Request $request) {
         return response()->json(['success', $request->user()]);
     });
     Route::patch('profile', [UserController::class, 'update']);
+    Route::get('/djs-should-follow', [djProfileController::class, 'djsYouShouldFollow']);
 
     // Mixes
     Route::post('mix/upload', [MixController::class, 'store']);
     Route::patch('mix/{id}/play', [MixController::class, 'incrementPlays']);
     Route::patch('mix/{id}', [MixController::class, 'update']);
     Route::delete('mix/{id}', [MixController::class, 'destroy']);
+    Route::post('/recently-played', [RecentlyPlayedController::class, 'store']);
+    Route::get('/recently-played', [RecentlyPlayedController::class, 'index']);
+    Route::get('/more-of-what-you-like', [MixLikesController::class, 'moreOfWhatYouLike']);
 
     // Likes
     Route::post('mix/{id}/like', [MixLikesController::class, 'addLike']);
@@ -81,4 +95,31 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/events', [EventController::class, 'store']);
     Route::patch('/events/{id}', [EventController::class, 'update']);
     Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
+
+    // get mixes genre
+
+
+
+
+});
+
+// Route notification
+Route::middleware('auth:sanctum')->get('/notifications', function (Request $request) {
+    return $request->user()->notifications;
+});
+Route::middleware('auth:sanctum')->post('/notifications/{id}/read', function ($id) {
+
+    $notification = Auth::user()
+        ->notifications()
+        ->where('id', $id)
+        ->first();
+
+    if ($notification) {
+        $notification->markAsRead();
+    }
+
+    return response()->json([
+        'message' => 'notification read'
+    ]);
 });

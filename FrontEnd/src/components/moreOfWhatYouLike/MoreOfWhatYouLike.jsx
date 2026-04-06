@@ -31,30 +31,37 @@ function MoreOfWhatYouLike() {
 
     return (
         <>
-            <h3 className="more-of-what-you-like title">More Of What You Like</h3>
-            <Swiper
-                // install Swiper modules
-                className="leksous-swiper"
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
-                spaceBetween={30}
-                slidesPerView={3}
-                navigation
-                pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
-            >
-                {
-                    mixes?.map(mix => {
-                        return (
-                            <SwiperSlide>
-                                <Mix mix={mix} />
-                            </SwiperSlide>
-                        )
+            {
+                mixes.length > 0 && (
+                    <>
+                        <h3 className="more-of-what-you-like title">More Of What You Like</h3>
+                        <Swiper
+                            // install Swiper modules
+                            className="leksous-swiper"
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            spaceBetween={30}
+                            slidesPerView={3}
+                            navigation
+                            pagination={{ clickable: true }}
+                            scrollbar={{ draggable: true }}
+                            onSwiper={(swiper) => console.log(swiper)}
+                            onSlideChange={() => console.log('slide change')}
+                        >
+                            {
+                                mixes?.map(mix => {
+                                    return (
+                                        <SwiperSlide>
+                                            <Mix mix={mix} />
+                                        </SwiperSlide>
+                                    )
 
-                    })
-                }
-            </Swiper>
+                                })
+                            }
+                        </Swiper>
+                    </>
+                )
+            }
+
 
         </>
     )

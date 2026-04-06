@@ -7,7 +7,6 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasFactory;
@@ -52,15 +51,34 @@ class User extends Authenticatable
     const ROLE_DJ = 'dj';
 
 
-    public function mixes() {
+    public function mixes()
+    {
         return $this->hasMany(Mix::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function djProfile() 
+    public function djProfile()
     {
         return $this->hasOne(DjProfile::class);
+    }
+    public function getProfilePictureAttribute($value)
+    {
+        return asset('storage/' . $value);
+    }
+    public function mixLikes()
+    {
+        return $this->hasMany(MixLike::class);
+    }
+    public function following()
+    {
+        return $this->hasMany(Follow::class, 'follower_id', 'id');
+    }
+
+    public function followers()
+    {
+        return $this->hasMany(Follow::class, 'following_id', 'id');
     }
 }

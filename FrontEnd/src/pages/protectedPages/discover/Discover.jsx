@@ -6,10 +6,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import DropDownProfile from '../../../components/dropDownProfile/DropDownProfile'
-
+import Footer from "../../../components/footer/Footer"
 // import Data Main
 import RecentlyPlayed from "../../../components/recentlyPlayed/RecentlyPlayed"
 import MoreOfWhatYouLike from "../../../components/moreOfWhatYouLike/MoreOfWhatYouLike"
+import DjsShouldFollow from "../../../components/djsShouldFollow/DjsShouldFollow"
+import VerificationPopup from "../../../components/verificationPopup/VerificationPopup"
 
 function Discover() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -113,7 +115,6 @@ function Discover() {
 
         setDropDown(prev => ({ ...prev, type: false }));
       }
-      // باقي dropdowns إذا كنتي محتاج
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -189,14 +190,23 @@ function Discover() {
       console.log(err);
     }
   }
+
+  const getNotifications = async () => {
+    try {
+      const re = await api.get('/notifications')
+      console.log(re);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
     getGenres()
+    getNotifications();
     console.log(user);
 
   }, [])
-  useEffect(() => {
-    console.log(infoSelectedSearchQuery);
-  }, [infoSelectedSearchQuery])
+
 
   const handleDropDown = (e) => {
     e.stopPropagation();
@@ -214,6 +224,7 @@ function Discover() {
   return (
     <div className="discover">
       <header>
+        <VerificationPopup user={user} />
         <img onClick={() => navigate('/discover')} src={logoWithoutName} className="left-section" alt="logo Afro Community" />
         {
           dropDown.profile && <ul ref={profileRef} className="drop-down drop-down-profile"><DropDownProfile /></ul>
@@ -322,7 +333,14 @@ function Discover() {
               <MoreOfWhatYouLike />
             </div>
           </section>
-          <section className="right-section-in-middle"></section>
+          <section className="right-section-in-middle">
+            <div className="container-more-infos djs-should-follow">
+              <DjsShouldFollow />
+            </div>
+            <footer>
+              <Footer />
+            </footer>
+          </section>
         </section>
       </main>
     </div >

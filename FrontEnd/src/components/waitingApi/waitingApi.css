@@ -1,0 +1,23 @@
+.loading-api {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circle-turn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 3px solid var(--text-secondary);
+  background-color: transparent;
+  /* animation: 1s all; */
+}
+
+/* @keyframes animateCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */

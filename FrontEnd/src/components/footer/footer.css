@@ -3,6 +3,7 @@
   padding: 10px 20px;
   text-align: center;
   font-size: 12px;
+  margin-top: var(--space-xl);
 }
 
 .footer a {

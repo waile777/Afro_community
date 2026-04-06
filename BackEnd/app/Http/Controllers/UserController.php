@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\VerificationRequiredNotification;
 
 class UserController extends Controller
 {
@@ -47,15 +48,18 @@ class UserController extends Controller
                 'bio' => 'nullable|string|min:10|max:200',
             ],
             [
-                'email.unique' => 'This email is already in use', // <-- message
-                'stage_name.unique' => 'This stage name is already taken by another DJ',
+                //  messages
+                'email.unique' => 'This email is already in use',
+                'stage_name.required_if' => 'Stage name is required for DJ accounts.',
+                'stage_name.regex' => 'Only letters, numbers, - and _ are allowed.',
+                'stage_name.unique' => 'This stage name is already taken.',
             ]
         );
         $roleUser = $request->is_dj ? User::ROLE_DJ : User::ROLE_LISTENER;
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
         } else {
-            $path = 'profile_pictures/default_profile.png';
+            $path = 'profile_pictures/default_profile.jpg';
         }
 
         $user = User::create([
@@ -78,7 +82,9 @@ class UserController extends Controller
                 'stage_name' =>  $request->stage_name,
                 'bio' => $request->bio,
             ]);
+            $response['user'] = $user->load(['mixes' , 'djProfile']);
             $response['djProfile'] = $djProfile;
+            $user->notify(new VerificationRequiredNotification());
         }
 
         return response()->json($response);
@@ -160,9 +166,16 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            return response()->json(['error' => 'invalide cridentials'], 401);
+            return response()->json(['error' => 'invalid credentials'], 401);
         }
-        $user = User::where('email', $request->email)->first(); // {'id' : 1 , email : $request->email...} | null 
+
+        $user = Auth::user();
+
+        if ($user->role === 'dj') {
+            $user->load('djProfile');
+            $user->load('mixes');
+        }
+
         $token = $user->createToken('AUTH_TOKEN')->plainTextToken;
 
         return response()->json([

@@ -28,6 +28,8 @@
 }
 .mix .container-image {
   margin-bottom: var(--space-xs);
+  height: 100%;
+  width: 100%;
 }
 .mix .container-image > img ,
 .mix > .title ,
@@ -67,7 +69,6 @@
   border-bottom-right-radius: var(--radius-sm);
   border-bottom-left-radius: var(--radius-sm);
   object-fit: cover;
-  background-color: red;
 }
 .mix > .title {
   white-space: nowrap;
@@ -161,4 +162,13 @@
 .mix .bottom-mix > .right-section > i.active {
   color: var(--text-main);
 }
-
+/* 
+.skeleton {
+  background-color: green;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-secondary);
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+} */

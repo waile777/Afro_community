@@ -28,6 +28,24 @@ class Mix extends Model
         'bpm',
         'view_count',
     ];
+    const GENRE_AFROHOUSE = 'afrohouse';
+    const GENRE_AFROTECH = 'afrotech';
+    const GENRE_AFROTRIBAL = 'afrotribal';
+    const GENRE_AMAPIANO = 'amapiano';
+    const GENRE_3STEP = '3step';
+    const GENRE_AFROPROGRESSIVE = 'afroprogressive';
+
+    public static function genres()
+    {
+        return [
+            self::GENRE_AFROHOUSE,
+            self::GENRE_AFROTECH,
+            self::GENRE_AFROTRIBAL,
+            self::GENRE_AMAPIANO,
+            self::GENRE_3STEP,
+            self::GENRE_AFROPROGRESSIVE,
+        ];
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -41,6 +59,9 @@ class Mix extends Model
             'user_id' => 'integer',
         ];
     }
+
+
+
     // get Path cover Image to the frontend whtih Accessoire get + fieldName + Attribute
     public function getCoverImageAttribute($value)
     {
@@ -59,7 +80,7 @@ class Mix extends Model
 
     public function playlists(): BelongsToMany
     {
-        return $this->belongsToMany(Playlist::class , 'playlist_mixes');
+        return $this->belongsToMany(Playlist::class, 'playlist_mixes');
     }
 
     public function comments(): HasMany
