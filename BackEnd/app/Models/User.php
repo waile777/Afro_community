@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasFactory;
@@ -44,7 +45,7 @@ class User extends Authenticatable
     {
         return [
             'id' => 'integer',
-            'password'=>'hashed'
+            'password' => 'hashed'
         ];
     }
     // ROLE_CONSTANT:
@@ -66,7 +67,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(DjProfile::class);
     }
-<<<<<<< HEAD
+
     public function getProfilePictureAttribute($value)
     {
         return asset('storage/' . $value);
@@ -84,12 +85,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Follow::class, 'following_id', 'id');
     }
-=======
+
 
     public function reservation(): HasMany
     {
         return $this->hasMany(Reservation::class);
     }
-
->>>>>>> efeb57767dc6c5039b76d09a2a8a3525d65b830f
 }

@@ -103,7 +103,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
 
-<<<<<<< HEAD
+
     // get mixes genre
 
 
@@ -137,26 +137,18 @@ Route::middleware('auth:sanctum')->group(function () {
         '/notifications/{id}',
         [NotificationController::class, 'destroy']
     );
-=======
     //tickets
-    Route::post('/events/{event}/tickets' , [TicketController::class , 'store']);
-    Route::delete('/tickets/{id}' , [TicketController::class , 'destroy']);
-    Route::patch('/tickets/{id}' , [TicketController::class , 'update']);
+    Route::post('/events/{event}/tickets', [TicketController::class, 'store']);
+    Route::delete('/tickets/{id}', [TicketController::class, 'destroy']);
+    Route::patch('/tickets/{id}', [TicketController::class, 'update']);
 
     //Reservation
-    Route::post('/reservation/{ticketid}' , [ReservetionController::class , 'store']);
-    Route::get('/reservations' , [ReservetionController::class , 'index']);
-    Route::delete('/reservations/{id}' , [ReservetionController::class , 'destroy']);
-
-
-    
-
-
->>>>>>> efeb57767dc6c5039b76d09a2a8a3525d65b830f
+    Route::post('/reservation/{ticketid}', [ReservetionController::class, 'store']);
+    Route::get('/reservations', [ReservetionController::class, 'index']);
+    Route::delete('/reservations/{id}', [ReservetionController::class, 'destroy']);
 });
 
 // Route notification
 Route::middleware('auth:sanctum')->get('/notifications', function (Request $request) {
     return $request->user()->notifications;
 });
-
