@@ -13,6 +13,7 @@ import MoreOfWhatYouLike from "../../../components/moreOfWhatYouLike/MoreOfWhatY
 import DjsShouldFollow from "../../../components/djsShouldFollow/DjsShouldFollow"
 import VerificationBanner from "../../../components/verificationBanner/VerificationBanner.jsx"
 import VerificationPopup from "../../../components/verificationPopup/VerificationPopup.jsx"
+import DropDownNotification from "../../../components/dropDownNotification/DropDownNotification.jsx"
 
 function Discover() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -20,12 +21,13 @@ function Discover() {
   const profileRef = useRef(null);
   const bpmRef = useRef(null);
   const typeRef = useRef(null);
+  const notifRef = useRef(null);
   const navigate = useNavigate()
   const [dropDown, setDropDown] = useState({
     'profile': false,
     'bpm': false,
     'type': false,
-    'notif': false,
+    'notif': true,
     'options': false,
     'expandedSearch': false
   })
@@ -38,6 +40,7 @@ function Discover() {
     'errorBPM': ''
   })
   const [notifications, setNotifications] = useState([])
+  const [loadingNotif, setLoadingNotif] = useState(false)
 
 
 
@@ -117,6 +120,11 @@ function Discover() {
 
         setDropDown(prev => ({ ...prev, type: false }));
       }
+      if (notifRef.current && !notifRef.current.contains(e.target)) {
+        console.log('contain');
+
+        setDropDown(prev => ({ ...prev, notif: false }));
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -195,22 +203,62 @@ function Discover() {
 
   // Notif Informations
   const getNotifications = async () => {
+    setLoadingNotif(true)
     try {
 
       const res = await api.get('/notifications')
-
       setNotifications(res.data)
 
     } catch (err) {
       console.log(err)
     }
+    setLoadingNotif(false)
   }
+  const verificationNotif =
+    notifications.find(n =>
+      n.data.type === "verification_required"
+    )
 
+  const hasUnreadNormalNotif =
+    notifications.some(n => !n.read_at && n.data.type !== "verification_required")
+
+  const showBadge =
+    hasUnreadNormalNotif || verificationNotif
+
+  const openNotifDropdown = async () => {
+
+    setDropDown(prev => ({
+      ...prev,
+      notif: !prev.notif
+    }))
+
+    // mark normal notifications as read
+    const normalUnread =
+      notifications.filter(n =>
+        !n.read_at &&
+        n.data.type !== "verification_required"
+      )
+
+    if (normalUnread.length > 0) {
+
+      await api.post("/notifications/read-normal")
+
+      setNotifications(prev =>
+        prev.map(n =>
+          n.data.type !== "verification_required"
+            ? { ...n, read_at: new Date() }
+            : n
+        )
+      )
+    }
+
+  }
 
 
   // user useEffect
   useEffect(() => {
     console.log(user);
+    console.log(notifications);
 
   }, [user])
 
@@ -247,6 +295,17 @@ function Discover() {
         {
           dropDown.profile && <ul ref={profileRef} className="drop-down drop-down-profile"><DropDownProfile /></ul>
         }
+        {/* drop down notif */}
+        {
+          dropDown.notif &&
+          <div className="drop-down drop-down-notification" ref={notifRef}>
+            <div className="top">
+              <h3>Notifications</h3>
+              <span onClick={getNotifications}>{loadingNotif ? "Loading..." : "Refresh"}</span>
+            </div>
+            <DropDownNotification notifications={notifications} />
+          </div>
+        }
         {/* Drop Down Notif Unread */}
 
 
@@ -258,8 +317,10 @@ function Discover() {
           </div>
           <div className="other-section">
             <div className="notif-section">
-              <i className={`bi bi-bell-fill ${dropDown.notif ? ' clicked' : ''}`} onClick={handleDropDown} name="notif"></i>
-              <div className="has-notif"></div>
+              <i className={`bi bi-bell-fill ${dropDown.notif ? ' clicked' : ''}`} onClick={openNotifDropdown} name="notif"></i>
+              {showBadge && (
+                <div className="notif-badge"></div>
+              )}
             </div>
             <div className="other-options">
               <i name="options" className={`bi bi-three-dots-vertical ${dropDown.options ? ' clicked' : ''}`} onClick={handleDropDown}></i>

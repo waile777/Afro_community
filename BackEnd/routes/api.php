@@ -137,6 +137,11 @@ Route::middleware('auth:sanctum')->group(function () {
         '/notifications/{id}',
         [NotificationController::class, 'destroy']
     );
+
+    Route::post('/notifications/read-normal', [NotificationController::class, 'markNormalAsRead']);
+
+
+
     //tickets
     Route::post('/events/{event}/tickets', [TicketController::class, 'store']);
     Route::delete('/tickets/{id}', [TicketController::class, 'destroy']);

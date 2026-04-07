@@ -11,6 +11,7 @@ export default function VerificationPopup({ notifications, user }) {
 
     useEffect(() => {
         if (verificationNotif) {
+            
             setShow(true)
         }
     }, [verificationNotif])

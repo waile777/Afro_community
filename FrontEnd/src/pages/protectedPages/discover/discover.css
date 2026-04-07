@@ -28,6 +28,55 @@
   align-items: flex-end;
   gap: var(--space-xs);
 }
+/* drop down notification */
+.discover header .drop-down.drop-down-notification {
+  position: absolute;
+  background-color: var(--bg-main);
+  border: 1px solid var(--text-secondary-op2);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  right: 0%;
+  top: 150%;
+  width: 375px;
+  padding: var(--space-md);
+}
+.discover header .drop-down.drop-down-notification > .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: var(--space-md);
+}
+.discover header .drop-down.drop-down-notification > .top > h3 {
+  color: var(--text-main);
+}
+.discover header .drop-down.drop-down-notification > .top > span {
+  color: var(--text-secondary-op);
+  font-size: var(--text-xss);
+  cursor: pointer;
+  transition: 0.2s all linear;
+}
+.discover header .drop-down.drop-down-notification > .top > span:hover {
+  color: var(--text-main);
+}
+.discover header .other-section .notif-section {
+  position: relative;
+}
+.discover header .other-section .notif-section > .notif-badge {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-links);
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  right: -3px;
+}
+
+
+
+
 /* dropdown profile */
 .discover header ul.drop-down-profile {
   background-color: var(--bg-main);
@@ -332,7 +381,7 @@
   .infoSelected {
   opacity: 1;
   transition:
-    opacity 0.3s .3s ease,
+    opacity 0.3s 0.3s ease,
     transform 0.3s ease;
 }
 
