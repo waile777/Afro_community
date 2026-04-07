@@ -15,7 +15,11 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\RecentlyPlayedController;
 use App\Models\DjProfile;
 use App\Models\MixLike;
-use Illuminate\Http\Notification\VerificationRequiredNotification;
+use App\Notifications\VerificationRequiredNotification;
+use App\Http\Controllers\NotificationController;
+
+
+
 
 Route::post('/login', [UserController::class, 'loginUser']);
 Route::post('/register', [UserController::class, 'store']);
@@ -100,26 +104,40 @@ Route::middleware('auth:sanctum')->group(function () {
     // get mixes genre
 
 
+    // Notif
+    Route::get(
+        '/notifications',
+        [NotificationController::class, 'index']
+    );
 
+    Route::get(
+        '/notifications/unread',
+        [NotificationController::class, 'unread']
+    );
 
+    Route::get(
+        '/notifications/unread-count',
+        [NotificationController::class, 'unreadCount']
+    );
+
+    Route::post(
+        '/notifications/{id}/read',
+        [NotificationController::class, 'markAsRead']
+    );
+
+    Route::post(
+        '/notifications/read-all',
+        [NotificationController::class, 'markAllAsRead']
+    );
+
+    Route::delete(
+        '/notifications/{id}',
+        [NotificationController::class, 'destroy']
+    );
 });
 
 // Route notification
 Route::middleware('auth:sanctum')->get('/notifications', function (Request $request) {
     return $request->user()->notifications;
 });
-Route::middleware('auth:sanctum')->post('/notifications/{id}/read', function ($id) {
 
-    $notification = Auth::user()
-        ->notifications()
-        ->where('id', $id)
-        ->first();
-
-    if ($notification) {
-        $notification->markAsRead();
-    }
-
-    return response()->json([
-        'message' => 'notification read'
-    ]);
-});

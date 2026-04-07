@@ -6,9 +6,61 @@ use App\Models\Mix;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\VerificationRequiredNotification;
 
 class MixController extends Controller
 {
+    // Update Notif Type Verification After Each Uploaded Mix
+    public function updateVerificationNotification($user)
+    {
+        $mixCount = $user->mixes()->count();
+
+        if ($mixCount > 2) {
+            $user->notifications()
+                ->where('type', VerificationRequiredNotification::class)
+                ->delete();
+            return;
+        }
+
+        $remaining = 2 - $mixCount;
+
+        $data = [
+
+            "type" => "verification_required",
+
+            "title" => "Account verification required",
+
+            "message" =>
+            "$remaining more track required to activate your DJ account",
+
+            "tracks_uploaded" => $mixCount,
+
+            "tracks_required" => 2,
+
+            "link" => "/upload"
+        ];
+
+
+        $existingNotification =
+            $user->notifications()
+            ->where(
+                'type',
+                VerificationRequiredNotification::class
+            )
+            ->first();
+
+        if ($existingNotification) {
+
+            $existingNotification->update([
+                "data" => $data
+            ]);
+        } else {
+
+            $user->notify(
+                new VerificationRequiredNotification($data)
+            );
+        }
+    }
     /**
      * Display a listing of the resource.
      */
@@ -52,6 +104,7 @@ class MixController extends Controller
             'genre' => $request->genre,
             'bpm' => $request->bpm
         ]);
+        $this->updateVerificationNotification(Auth::user());
         return response()->json($mix);
     }
 
@@ -111,5 +164,4 @@ class MixController extends Controller
             'genres' => Mix::genres()
         ]);
     }
-
 }

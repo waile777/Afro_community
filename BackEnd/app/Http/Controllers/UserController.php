@@ -82,9 +82,27 @@ class UserController extends Controller
                 'stage_name' =>  $request->stage_name,
                 'bio' => $request->bio,
             ]);
-            $response['user'] = $user->load(['mixes' , 'djProfile']);
+            $response['user'] = $user->load(['mixes', 'djProfile']);
             $response['djProfile'] = $djProfile;
-            $user->notify(new VerificationRequiredNotification());
+            $user->notify(
+                new VerificationRequiredNotification([
+
+                    "type" => "verification_required",
+
+                    "title" => "Upload 2 tracks",
+
+                    "message" =>
+                    "To get your account verified, please upload 2 original tracks.
+                     Once approved, you can upload unlimited mixes and create events.",
+
+                    "tracks_uploaded" => 0,
+
+                    "tracks_required" => 2,
+
+                    "link" => "/upload"
+
+                ])
+            );
         }
 
         return response()->json($response);
