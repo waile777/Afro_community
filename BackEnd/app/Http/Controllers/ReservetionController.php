@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class ReservetionController extends Controller
@@ -12,6 +13,10 @@ class ReservetionController extends Controller
     public function index()
     {
         //
+        $allreservations = Reservation::with('user','ticket')->latest()->get();
+        return response()->json([
+            "allTickets"=>$allreservations
+        ]);
     }
 
     /**
@@ -28,7 +33,7 @@ class ReservetionController extends Controller
     public function store(Request $request , $ticketid)
     {
         //post=>/reservations/ticketid 
-
+        $this->authorize('create' , Reservation::class);
         $request->validate([
             "reserved_at"=>"date"
         ]);
@@ -74,6 +79,8 @@ class ReservetionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+        return response()->json(["message"=>"reservation deleted"]);
     }
 }

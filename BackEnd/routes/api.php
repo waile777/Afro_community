@@ -92,6 +92,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Reservation
     Route::post('/reservation/{ticketid}' , [ReservetionController::class , 'store']);
+    Route::get('/reservations' , [ReservetionController::class , 'index']);
+    Route::delete('/reservations/{id}' , [ReservetionController::class , 'destroy']);
+
+
+    
 
 
 });
