@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Dom\Comment;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,4 +65,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(DjProfile::class);
     }
+
+    public function reservation(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
 }

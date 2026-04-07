@@ -38,7 +38,7 @@ class TicketController extends Controller
 
         $request->validate([
             "type"=>"required|string|max:255",
-            "price"=>"required|descimal",
+            "price"=>"required|numeric",
             "quantity"=>"required|integer"
         ]);
 
