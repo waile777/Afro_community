@@ -32,7 +32,7 @@ class CommentController extends Controller
         $comment = Comment::create([
             'user_id' => Auth::id(),
             'mix_id' => $id,
-            'content' => $request->content
+            'content' =>$request->content,
         ]);
         return response()->json($comment);
     }

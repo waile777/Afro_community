@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\DjProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,38 +24,12 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(StoreUserRequest $request)
     {
-        $request->validate(
-            [
-                'first_name' => 'required|string|min:2|max:255',
-                'last_name' => 'required|string|min:2|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6',
-                'profile_picture' => [
-                    'image',
-                    'mimes:jpg,png,jpeg,gif,svg',
-                ],
-                'stage_name' => [
-                    'required_if:is_dj,1',
-                    'unique:dj_profiles,stage_name',
-                    'max:30',
-                    'min:2',
-                    'regex:/^[a-zA-Z0-9_-]+$/', // letters, numbers, underscore, dash only
-                ],
-                'bio' => 'nullable|string|min:10|max:200',
-            ],
-            [
-                //  messages
-                'email.unique' => 'This email is already in use',
-                'stage_name.required_if' => 'Stage name is required for DJ accounts.',
-                'stage_name.regex' => 'Only letters, numbers, - and _ are allowed.',
-                'stage_name.unique' => 'This stage name is already taken.',
-            ]
-        );
+
+        $data = $request->validated();
+
         $roleUser = $request->is_dj ? User::ROLE_DJ : User::ROLE_LISTENER;
         if ($request->hasFile('profile_picture')) {
             $path = $request->file('profile_picture')->store('profile_pictures', 'public'); //profile_pictures/profile_picture.png
@@ -63,10 +38,10 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => HASH::make($request->password),
+            'first_name' => $data['first_name'] ?? null,
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => HASH::make($data['password']),
             'role' => $roleUser,
             'profile_picture' => $path
         ]);
@@ -186,14 +161,10 @@ class UserController extends Controller
         ])) {
             return response()->json(['error' => 'invalid credentials'], 401);
         }
-
-        $user = Auth::user();
-
+        $user = User::where('email', $request->email)->firstOrFail(); // {'id' : 1 , email : $request->email...} | null 
         if ($user->role === 'dj') {
-            $user->load('djProfile');
-            $user->load('mixes');
+            $user->load('djProfile', 'mixes');
         }
-
         $token = $user->createToken('AUTH_TOKEN')->plainTextToken;
 
         return response()->json([
