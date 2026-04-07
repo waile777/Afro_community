@@ -33,8 +33,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('users/{id}', [UserController::class, 'destroy']);
 
 
-
-
     // User profile
     Route::get('profile', function (Request $request) {
         return response()->json(['success', $request->user()]);
@@ -96,7 +94,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/reservations/{id}' , [ReservetionController::class , 'destroy']);
 
 
-    
+
 
 
 });
