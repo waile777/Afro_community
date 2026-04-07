@@ -1,0 +1,46 @@
+.verification {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--border-color);
+  border-radius: var(--space-xs);
+  padding: var(--space-md) var(--space-2xl);
+  justify-content: center;
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.verification.dj-under-two-mixes > p {
+  color: var(--text-secondary);
+  font-size: var(--text-xss);
+  font-weight: 100;
+}
+.verification.dj-under-two-mixes > p  > a {
+    color: var(--text-style);
+    margin-left: var(--space-xs);
+}
+.verification > button.remove-pooup {
+  position: absolute;
+  width: 30px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--space-xs);
+  border: none;
+  font-size: 20px;
+  color: var(--text-secondary);
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--text-secondary-op);
+  transition: 0.2s all ease;
+  right: 1%;
+}
+.verification > button.remove-pooup:hover {
+  color: var(--text-secondary);
+  background-color: var(--text-secondary-op2);
+}
+

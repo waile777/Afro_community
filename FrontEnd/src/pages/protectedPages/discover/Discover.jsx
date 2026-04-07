@@ -11,7 +11,8 @@ import Footer from "../../../components/footer/Footer"
 import RecentlyPlayed from "../../../components/recentlyPlayed/RecentlyPlayed"
 import MoreOfWhatYouLike from "../../../components/moreOfWhatYouLike/MoreOfWhatYouLike"
 import DjsShouldFollow from "../../../components/djsShouldFollow/DjsShouldFollow"
-import VerificationPopup from "../../../components/verificationPopup/VerificationPopup"
+import VerificationBanner from "../../../components/verificationBanner/VerificationBanner.jsx"
+import VerificationPopup from "../../../components/verificationPopup/VerificationPopup.jsx"
 
 function Discover() {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -36,6 +37,7 @@ function Discover() {
     'inputBPM': '',
     'errorBPM': ''
   })
+  const [notifications, setNotifications] = useState([])
 
 
 
@@ -191,21 +193,26 @@ function Discover() {
     }
   }
 
+  // Notif Informations
   const getNotifications = async () => {
     try {
-      const re = await api.get('/notifications')
-      console.log(re);
+
+      const res = await api.get('/notifications')
+
+      setNotifications(res.data)
 
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   }
+
+
+
+  // user useEffect
   useEffect(() => {
-    getGenres()
-    getNotifications();
     console.log(user);
 
-  }, [])
+  }, [user])
 
 
   const handleDropDown = (e) => {
@@ -221,14 +228,28 @@ function Discover() {
     }));
   };
 
+
+
+
+  useEffect(() => {
+    getGenres()
+    getNotifications()
+
+  }, [])
+
   return (
     <div className="discover">
+      <VerificationPopup notifications={notifications} user={user} />
       <header>
-        <VerificationPopup user={user} />
+        <VerificationBanner notifications={notifications} />
         <img onClick={() => navigate('/discover')} src={logoWithoutName} className="left-section" alt="logo Afro Community" />
+        {/* Drop Down Profile */}
         {
           dropDown.profile && <ul ref={profileRef} className="drop-down drop-down-profile"><DropDownProfile /></ul>
         }
+        {/* Drop Down Notif Unread */}
+
+
         <NavLinks className="center-section" />
         <div className="right-section">
           <div className="profile-section">
