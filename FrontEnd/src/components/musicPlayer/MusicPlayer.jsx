@@ -19,7 +19,7 @@ import {
     EjectIcon,
     StopIcon,
     RecordIcon
-} from "../../components/musicPlayerIcons/MusicIcons";
+} from "@/assets/musicPlayerIcons/MusicIcon";
 import React from 'react'
 
 function MusicPlayer({ info }) {

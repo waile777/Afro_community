@@ -32,8 +32,8 @@ function MoreOfWhatYouLike() {
     return (
         <>
             {
-                mixes.length > 0 && (
-                    <>
+                mixes.length > 0 ? (
+                    <div className="container-mixes more-of-what-you-like">
                         <h3 className="more-of-what-you-like title">More Of What You Like</h3>
                         <Swiper
                             // install Swiper modules
@@ -58,8 +58,10 @@ function MoreOfWhatYouLike() {
                                 })
                             }
                         </Swiper>
-                    </>
+                    </div>
                 )
+                    :
+                    null
             }
 
 

@@ -1,93 +1,13 @@
 .discover {
+  position: relative;
   width: var(--width-laptop);
   margin: 0 auto;
-  position: relative;
   margin-top: var(--space-sm);
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
 }
 
-.discover header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.discover header img.left-section {
-  width: 25px;
-  cursor: pointer;
-}
-.discover header .right-section {
-  display: flex;
-  align-items: center;
-  gap: var(--space-lg);
-}
-.discover header .right-section .profile-section {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--space-xs);
-}
-/* dropdown profile */
-.discover header ul.drop-down-profile {
-  background-color: var(--bg-main);
-  border: 1px solid var(--text-secondary-op2);
-  color: var(--text-main);
-  list-style-type: none;
-  border-radius: var(--radius-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;
-  right: 0%;
-  top: 150%;
-}
-.discover header ul.drop-down-profile > li {
-  padding: var(--space-sm);
-  margin-right: var(--space-xl);
-  cursor: pointer;
-  width: 100%;
-}
-.discover header ul.drop-down-profile > li > a {
-  margin-left: var(--space-xs);
-  color: var(--text-main);
-  text-decoration: none;
-  font-size: var(--text-xss);
-}
-.discover header ul.drop-down-profile > li:hover > a,
-.discover header ul.drop-down-profile > li:hover > i {
-  color: var(--text-secondary-op);
-}
-
-.discover header .right-section .profile-section > i,
-.discover header .other-section .notif-section > i,
-.discover header .other-section .other-options > i {
-  color: var(--text-secondary-op);
-  transition: 0.2s all linear;
-  cursor: pointer;
-}
-.discover header .right-section .profile-section > i:hover,
-.discover header .other-section .notif-section > i:hover,
-.discover header .other-section .other-options > i:hover {
-  color: var(--text-main);
-}
-.discover header .right-section .profile-section > i.clicked,
-.discover header .other-section .notif-section > i.clicked,
-.discover header .other-section .other-options > i.clicked {
-  color: var(--text-main);
-}
-.discover header .right-section .profile-section > img {
-  width: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.discover header .other-section {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  color: var(--text-secondary-op);
-}
 
 /* main */
 .discover main.main-section {
@@ -332,7 +252,7 @@
   .infoSelected {
   opacity: 1;
   transition:
-    opacity 0.3s .3s ease,
+    opacity 0.3s 0.3s ease,
     transform 0.3s ease;
 }
 

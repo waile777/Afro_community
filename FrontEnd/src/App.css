@@ -1,32 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 :root {
-  --width-laptop : 1240px;
+  --width-laptop: 1240px;
   /* colors */
-  --bg-main: #17152F;
-  --bg-gradient : #3429c7;
+  --bg-main: #17152f;
+  --bg-gradient: #3429c7;
   --bg-secondary: #232139;
-  --bg-third : #222039;
+  --bg-third: #222039;
   --bg-hover: #222222;
-  --bg-fhored : rgb(242, 240, 255);
-  --bg-style : rgb(255, 213, 0);
+  --bg-fhored: rgb(242, 240, 255);
+  --bg-style: rgb(255, 213, 0);
 
   --text-main: #ffffff;
   --text-secondary: #b3b3b3;
   --text-secondary-op: #828282;
-  --text-secondary-op2 :  rgba(128, 128, 128, 0.072);
-  --text-primary-hover: #5928E5;
-  --text-third : #FF320D;
-  --text-black : black;
+  --text-secondary-op2: rgba(128, 128, 128, 0.072);
+  --text-primary-hover: #5928e5;
+  --text-third: #ff320d;
+  --text-black: black;
 
-  --b-primary: #5928E5;
+  --b-primary: #5928e5;
   --b-primary-hover: #3c1d93;
-  --b-secondary-hover: #F3F3F3;
-
+  --b-secondary-hover: #f3f3f3;
 
   --border-color: #323047;
   --input-padding: 10px 20px;
-  --color-links : #00AAFF;
-  
+  --color-links: #00aaff;
 
   /* spacing */
   --space-xs: 8px;
@@ -56,12 +54,16 @@
   --text-2xl: 52px;
 
   /* buttons */
-  --btn-main : #5928E5; 
-  --btn-hover : #F3F3F3;
-  --btn-text-hover :#5928E5;
+  --btn-main: #5928e5;
+  --btn-hover: #f3f3f3;
+  --btn-text-hover: #5928e5;
 
   /* links */
-  --link-hover :#8860f8;
+  --link-hover: #8860f8;
+}
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 * {
   margin: 0;

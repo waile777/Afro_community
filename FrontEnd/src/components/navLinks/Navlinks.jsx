@@ -7,8 +7,8 @@ function Navlinks() {
     const user = JSON.parse(localStorage.getItem('user'));
     const links = [
         { label: "Home", to: "/discover" },
+        { label: "Library", to: "/library" },
         { label: "Events", to: "/events" },
-
         { label: "Upload", to: "/upload", roles: ["dj"] },
         { label: "Become DJ", to: "/become-dj", roles: ["listener"] },
 

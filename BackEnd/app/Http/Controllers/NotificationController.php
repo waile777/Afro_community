@@ -78,4 +78,13 @@ class NotificationController extends Controller
             'message' => 'notification deleted'
         ]);
     }
+    public function markNormalAsRead()
+    {
+        Auth::user()
+            ->unreadNotifications()
+            ->where('type', '!=', 'App\Notifications\VerificationRequiredNotification')
+            ->update(['read_at' => now()]);
+
+        return response()->json();
+    }
 }
