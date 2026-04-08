@@ -19,7 +19,8 @@ use App\Models\DjProfile;
 use App\Models\MixLike;
 use App\Notifications\VerificationRequiredNotification;
 use App\Http\Controllers\NotificationController;
-
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -59,9 +60,25 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('mix/{id}/play', [MixController::class, 'incrementPlays']);
     Route::patch('mix/{id}', [MixController::class, 'update']);
     Route::delete('mix/{id}', [MixController::class, 'destroy']);
+    Route::get('/mix/{dj}/{track}', [MixController::class, 'show']);
     Route::post('/recently-played', [RecentlyPlayedController::class, 'store']);
     Route::get('/recently-played', [RecentlyPlayedController::class, 'index']);
     Route::get('/more-of-what-you-like', [MixLikesController::class, 'moreOfWhatYouLike']);
+    Route::get('/mix-audio/{file}', function ($file) {
+
+        $path = storage_path('app/public/mixes/' . $file);
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        return response()->file($path, [
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => 'GET',
+            'Access-Control-Allow-Headers' => '*'
+        ]);
+    });
+    
 
     // Likes
     Route::post('mix/{id}/like', [MixLikesController::class, 'addLike']);

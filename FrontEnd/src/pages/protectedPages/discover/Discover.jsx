@@ -1,21 +1,17 @@
 import './discover.css'
 import api from '../../../api.js'
-import NavLinks from '../../../components/navLinks/NavLinks'
-import logoWithoutName from "../../../assets/logo/logo_bold_without_name.svg"
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import DropDownProfile from '../../../components/dropDownProfile/DropDownProfile'
 import Footer from "../../../components/footer/Footer"
 // import Data Main
 import RecentlyPlayed from "../../../components/recentlyPlayed/RecentlyPlayed"
 import MoreOfWhatYouLike from "../../../components/moreOfWhatYouLike/MoreOfWhatYouLike"
 import DjsShouldFollow from "../../../components/djsShouldFollow/DjsShouldFollow"
-import VerificationBanner from "../../../components/verificationBanner/VerificationBanner.jsx"
 import VerificationPopup from "../../../components/verificationPopup/VerificationPopup.jsx"
-import DropDownNotification from "../../../components/dropDownNotification/DropDownNotification.jsx"
-
+import { useNotifications } from "@/context/NotificationContext"
 function Discover() {
+  const { notifications } = useNotifications()
   const user = JSON.parse(localStorage.getItem('user'));
   const maxValuesBPM = 3;
   const profileRef = useRef(null);
@@ -39,8 +35,6 @@ function Discover() {
     'inputBPM': '',
     'errorBPM': ''
   })
-  const [notifications, setNotifications] = useState([])
-  const [loadingNotif, setLoadingNotif] = useState(false)
 
 
 
@@ -201,64 +195,12 @@ function Discover() {
     }
   }
 
-  // Notif Informations
-  const getNotifications = async () => {
-    setLoadingNotif(true)
-    try {
 
-      const res = await api.get('/notifications')
-      setNotifications(res.data)
-
-    } catch (err) {
-      console.log(err)
-    }
-    setLoadingNotif(false)
-  }
-  const verificationNotif =
-    notifications.find(n =>
-      n.data.type === "verification_required"
-    )
-
-  const hasUnreadNormalNotif =
-    notifications.some(n => !n.read_at && n.data.type !== "verification_required")
-
-  const showBadge =
-    hasUnreadNormalNotif || verificationNotif
-
-  const openNotifDropdown = async () => {
-
-    setDropDown(prev => ({
-      ...prev,
-      notif: !prev.notif
-    }))
-
-    // mark normal notifications as read
-    const normalUnread =
-      notifications.filter(n =>
-        !n.read_at &&
-        n.data.type !== "verification_required"
-      )
-
-    if (normalUnread.length > 0) {
-
-      await api.post("/notifications/read-normal")
-
-      setNotifications(prev =>
-        prev.map(n =>
-          n.data.type !== "verification_required"
-            ? { ...n, read_at: new Date() }
-            : n
-        )
-      )
-    }
-
-  }
 
 
   // user useEffect
   useEffect(() => {
     console.log(user);
-    console.log(notifications);
 
   }, [user])
 
@@ -279,57 +221,9 @@ function Discover() {
 
 
 
-  useEffect(() => {
-    getGenres()
-    getNotifications()
-
-  }, [])
-
   return (
     <div className="discover">
       <VerificationPopup notifications={notifications} user={user} />
-      <header>
-        <VerificationBanner notifications={notifications} />
-        <img onClick={() => navigate('/discover')} src={logoWithoutName} className="left-section" alt="logo Afro Community" />
-        {/* Drop Down Profile */}
-        {
-          dropDown.profile && <ul ref={profileRef} className="drop-down drop-down-profile"><DropDownProfile /></ul>
-        }
-        {/* drop down notif */}
-        {
-          dropDown.notif &&
-          <div className="drop-down drop-down-notification" ref={notifRef}>
-            <div className="top">
-              <h3>Notifications</h3>
-              <span onClick={getNotifications}>{loadingNotif ? "Loading..." : "Refresh"}</span>
-            </div>
-            <DropDownNotification notifications={notifications} />
-          </div>
-        }
-        {/* Drop Down Notif Unread */}
-
-
-        <NavLinks className="center-section" />
-        <div className="right-section">
-          <div className="profile-section">
-            <img src={user.profile_picture} name="profile" onClick={(e) => handleDropDown(e)} alt="profile user" />
-            <i name="profile" className={`bi bi-chevron-${dropDown.profile ? 'up clicked' : 'down'}`} onClick={(e) => handleDropDown(e)}></i>
-          </div>
-          <div className="other-section">
-            <div className="notif-section">
-              <i className={`bi bi-bell-fill ${dropDown.notif ? ' clicked' : ''}`} onClick={openNotifDropdown} name="notif"></i>
-              {showBadge && (
-                <div className="notif-badge"></div>
-              )}
-            </div>
-            <div className="other-options">
-              <i name="options" className={`bi bi-three-dots-vertical ${dropDown.options ? ' clicked' : ''}`} onClick={handleDropDown}></i>
-            </div>
-          </div>
-
-        </div>
-      </header>
-
       <main className="main-section">
         <section className="top-section">
           {getTitleUser()}
@@ -408,12 +302,8 @@ function Discover() {
         </section>
         <section className="middle-section">
           <section className="left-section-in-middle">
-            <div className="container-mixes recently-mixes">
-              <RecentlyPlayed />
-            </div>
-            <div className="container-mixes more-of-what-you-like">
-              <MoreOfWhatYouLike />
-            </div>
+            <RecentlyPlayed />
+            <MoreOfWhatYouLike />
           </section>
           <section className="right-section-in-middle">
             <div className="container-more-infos djs-should-follow">

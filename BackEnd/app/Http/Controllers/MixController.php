@@ -111,10 +111,36 @@ class MixController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($dj, $track)
     {
-        // get  => api/mix/2
-        return Mix::with(['user', 'comments'])->findOrFail($id);
+
+        if ($dj === "you") {
+
+            $djId =
+                auth()->id();
+        } else {
+
+            $djId =
+                User::whereHas(
+                    'djProfile',
+                    fn($q) => $q->whereRaw(
+                        "LOWER(REPLACE(stage_name,' ','-')) = ?",
+                        [$dj]
+                    )
+                )->value('id');
+        }
+
+        $mix =
+            Mix::where('user_id', $djId)
+            ->whereRaw(
+                "LOWER(REPLACE(title,' ','-')) = ?",
+                [$track]
+            )
+            ->with('user.djProfile')
+            ->firstOrFail();
+        $mix->audio_file = url('/mix-audio/' . basename($mix->audio_file));
+
+        return response()->json($mix);
     }
 
     /**

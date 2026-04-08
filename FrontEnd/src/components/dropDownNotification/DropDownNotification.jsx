@@ -16,16 +16,16 @@ function DropDownNotification({ notifications }) {
                         {
                             notifications.map((notif, i) => {
                                 return (
-                                    <>
+                                    <div key={i}>
                                         <p className="notification">{notif.data.title}</p>
                                         {
                                             notifications.length - 1 > i && <div className="line"></div>
                                         }
-                                    </>
+                                    </div>
                                 )
                             })
                         }
-                        <Link  to={'/notificatons'}>View All notifications</Link>
+                        <Link to={'/notificatons'}>View All notifications</Link>
                     </>
 
                     :

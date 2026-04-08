@@ -40,7 +40,7 @@ function RecentlyPlayed() {
         <>
             {
                 mixes.length > 0 ? (
-                    <>
+                    <div className="container-mixes recently-mixes">
                         <h3 className="recently title">Recently Played</h3 >
                         {
                             apiState === "loading" && (
@@ -74,7 +74,7 @@ function RecentlyPlayed() {
                                 </Swiper>
                             )
                         }
-                    </>
+                    </div>
                 )
                     :
                     (
