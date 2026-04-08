@@ -5,6 +5,7 @@ import Register from './pages/register/Register'
 import ProtectedRoute from './components/ProtectedRoute'
 import Discover from './pages/protectedPages/discover/Discover'
 import Home from './pages/home/Home'
+import Upload from './pages/uploadPage/upload'
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
             <Discover />
           </ProtectedRoute>
         } />
+        <Route path='/upload' element={<Upload/>}/>
       </Routes>
     </>
   )
