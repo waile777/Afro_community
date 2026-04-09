@@ -136,8 +136,22 @@ class MixController extends Controller
                 "LOWER(REPLACE(title,' ','-')) = ?",
                 [$track]
             )
-            ->with('user.djProfile')
+            ->with(['user' => function ($query) {
+                $query->with('djProfile')->withCount(['mixes', 'followers']);
+            }])
+            ->withCount('likes')
             ->firstOrFail();
+        
+        // Count DJ likes on comments
+        $djLikesCount = $mix->comments()
+            ->whereHas('user', function ($q) {
+                $q->where('role', 'dj');
+            })
+            ->count();
+        
+        $mix->dj_likes_count = $djLikesCount;
+        $mix->mix_likes_count = $mix->likes_count;
+        unset($mix->likes_count);
         $mix->audio_file = url('/mix-audio/' . basename($mix->audio_file));
 
         return response()->json($mix);

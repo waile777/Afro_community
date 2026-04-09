@@ -1,0 +1,119 @@
+.dj-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: linear-gradient(
+    135deg,
+    rgba(89, 40, 229, 0.1) 0%,
+    rgba(50, 48, 71, 0.5) 100%
+  );
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 200px;
+  margin-top: var(--space-lg);
+}
+
+.dj-profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dj-stage-name {
+  color: var(--text-main);
+  font-size: var(--text-md);
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}
+
+.dj-stats {
+  display: flex;
+  gap: var(--space-xl);
+  width: 100%;
+  justify-content: center;
+  padding: var(--space-md) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: var(--text-xss);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  color: var(--text-main);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.dj-follow-btn {
+  background: var(--btn-main);
+  color: var(--text-main);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  border: 2px solid transparent;
+}
+.dj-follow-btn:hover {
+  color: var(--btn-main);
+  background-color: var(--btn-hover);
+  border-radius: var(--radius-md);
+  border-color: var(--btn-main);
+}
+
+.dj-follow-btn.following {
+  color: var(--btn-main);
+  background-color: var(--btn-hover);
+  border-radius: var(--radius-md);
+  border-color: var(--btn-main);
+}
+
+.dj-follow-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dj-report-link {
+  color: var(--text-secondary);
+  font-size: var(--text-xss);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dj-report-link:hover {
+  color: var(--text-third);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .dj-profile-card {
+    max-width: 100%;
+    padding: var(--space-md);
+  }
+
+  .dj-stats {
+    gap: var(--space-lg);
+  }
+
+  .dj-follow-btn {
+    padding: var(--space-sm) var(--space-md);
+  }
+}

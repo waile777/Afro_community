@@ -1,0 +1,218 @@
+.mix-likes-section {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.likes-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.likes-icon-wrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.likes-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+  
+}
+
+.mix-likes:hover .likes-icon-wrapper {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+}
+
+.mix-likes:hover .likes-icon {
+  color: #ff5500;
+}
+
+.dj-wrapper {
+  background: linear-gradient(135deg, rgba(89, 40, 229, 0.2) 0%, rgba(160, 147, 231, 0.1) 100%);
+  border: 1px solid rgba(89, 40, 229, 0.3);
+}
+
+.dj-icon {
+  color: #a093e7;
+}
+
+.dj-likes {
+  position: relative;
+}
+
+.dj-likes:hover .likes-icon-wrapper {
+  background: linear-gradient(135deg, rgba(89, 40, 229, 0.35) 0%, rgba(160, 147, 231, 0.2) 100%);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(89, 40, 229, 0.3);
+}
+
+.dj-likes:hover .likes-icon {
+  color: #ffffff;
+}
+
+.dj-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: linear-gradient(var(--btn-main), var(--bg-gradient));
+  color: var(--text-main);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: 2px solid var(--bg-main);
+}
+
+.likes-count {
+  color: var(--text-main);
+  font-size: var(--text-xss);
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* DJ Hover Card */
+.dj-hover-card {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--space-md);
+  background: linear-gradient(135deg, rgba(89, 40, 229, 0.15) 0%, rgba(50, 48, 71, 0.6) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.dj-hover-card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--border-color);
+}
+
+.dj-hover-image {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.dj-hover-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  text-align: center;
+}
+
+.dj-hover-name {
+  color: var(--text-main);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  margin: 0;
+}
+
+.dj-hover-followers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-xs) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.followers-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.followers-count {
+  color: #a093e7;
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.dj-hover-follow-btn {
+  background: linear-gradient(var(--btn-main), var(--bg-gradient));
+  color: var(--text-main);
+  border: none;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: var(--space-xs);
+}
+
+.dj-hover-follow-btn:hover {
+  background: linear-gradient(var(--btn-main), var(--bg-secondary));
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .mix-likes-section {
+    flex-direction: row;
+    gap: var(--space-md);
+  }
+
+  .likes-item {
+    flex-direction: row;
+    gap: var(--space-sm);
+  }
+
+  .dj-hover-card {
+    position: fixed;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: var(--space-xl);
+  }
+}

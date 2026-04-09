@@ -1,0 +1,30 @@
+.options-mix {
+    display: flex;
+    gap: var(--space-md);
+    color: var(--text-secondary-op);
+    margin-top: var(--space-xs);
+}
+.options-mix > .option-mix {
+    background-color: var(--border-color);
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s all linear;
+    cursor: pointer;
+
+}
+.options-mix > .option-mix:hover {
+    color: var(--text-main);
+}
+.options-mix > .option-mix.clicked {
+    color: var(--text-main);
+}
+.options-mix > .option-mix.like.clicked {
+    color: var(--color-links);
+}
+.options-mix > .option-mix > i {
+    pointer-events: none;
+}

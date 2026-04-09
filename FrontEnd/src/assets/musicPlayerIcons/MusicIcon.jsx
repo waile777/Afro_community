@@ -34,3 +34,4 @@ export const ShareIcon = () => <i className="bi bi-share"></i>;
 
 export const ThreeDotsVertical = () => <i className="bi bi-three-dots-vertical"></i>
 export const ThreeDots = () => <i className="bi bi-three-dots"></i>
+export const HeartIcon = () => <i class="bi bi-suit-heart-fill"></i>

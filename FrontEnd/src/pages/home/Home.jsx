@@ -68,8 +68,8 @@ function Home() {
             <button className="sign-up" onClick={() => navigate('/login')}>Sign Up</button>
             <button className="create-account" onClick={() => navigate('/register')}>Create Account</button>
           </div>
-
         </div>
+        
         <div className="center">
           <h1 className="title">Welcome to <span>Afro Community</span></h1>
           <p className="description">

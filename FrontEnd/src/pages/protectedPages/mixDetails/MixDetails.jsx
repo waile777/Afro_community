@@ -20,16 +20,20 @@ import {
     ShuffleIcon,
     EjectIcon,
     StopIcon,
-    RecordIcon
+    RecordIcon,
+    ThreeDots,
+    PlaylistAddIcon
 } from "@/assets/musicPlayerIcons/MusicIcon";
 import React, { useEffect, useState, useRef } from 'react'
 import WaveformPlayer from "@/components/waveFormPlayer/WaveformPlayer"
+import OptionMix from "@/components/optionsMix/OptionsMix"
+import DjProfile from "@/components/djProfile/DjProfile"
+import MixLikesSection from "@/components/mixLikesSection/MixLikesSection"
 
 
 function MixDetails() {
     const [mix, setMix] = useState(null)
     const [isPlaying, setIsPlaying] = useState(false)
-    const [colors, setColors] = useState([[200, 200, 200], [100, 100, 100]])
     const waveformRef = useRef(null)
     const { dj, track } = useParams()
     const getMix = async () => {
@@ -54,10 +58,23 @@ function MixDetails() {
     useEffect(() => {
         console.log(mix);
     }, [mix])
-
-
     const handlePlayPause = () => {
         waveformRef.current?.playPause()
+    }
+
+
+    const formatDate = (dateString) => {
+        if (!dateString) return ''
+        try {
+            const date = new Date(dateString.replace(' ', 'T').replace(/(\d{4}-\d{2}-\d{2})(\d{2}:\d{2}:\d{2})/, '$1T$2'))
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            })
+        } catch (error) {
+            return dateString
+        }
     }
 
 
@@ -76,8 +93,11 @@ function MixDetails() {
                                 <button onClick={handlePlayPause}>
                                     {isPlaying ? <PauseIcon /> : <PlayIcon />}
                                 </button>
+                                <p className="genre">#{mix?.genre}</p>
                             </div>
+                            <p className="created_at">Released: {formatDate(mix?.created_at)}</p>
                             <img src={mix?.cover_image} className="right cover-image" alt="" />
+                            
                         </div>
                         <div className="bottom">
                             {
@@ -102,7 +122,16 @@ function MixDetails() {
                     <section className="comment-section">
                         <img src={mix?.user.profile_picture} alt="profile picture user" />
                         <input type="text" placeholder="Share what you Fell right Now" name="comment" className="comment-input" />
-                        <button className="send-comment" name="send-comment"><RecordIcon /></button>
+                        <button className="send-comment" name="send-comment"><i className="bi bi-send-fill"></i></button>
+                    </section>
+                    <section className="options-mix">
+                        <div className="left">
+                            <OptionMix />
+                            {mix && <DjProfile mix={mix} />}
+                        </div>
+                        <div className="right right-section-likes">
+                                {mix && <MixLikesSection mix={mix} />}
+                            </div>
                     </section>
                 </div>
                 <div className="right">
