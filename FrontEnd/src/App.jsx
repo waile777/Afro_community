@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Discover from './pages/protectedPages/discover/Discover'
 import Home from './pages/home/Home'
 import Upload from './pages/uploadPage/upload'
+import {NotificationProvider} from '@/context/NotificationContext'
 function App() {
   return (
     <NotificationProvider>

@@ -97,6 +97,7 @@ p {
 
 body {
   background-color: var(--bg-main);
+  /* height: 100vh; */
 }
 .drop-down {
   z-index: 999;

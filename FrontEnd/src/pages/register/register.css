@@ -19,7 +19,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-3xl);
+  padding: var(--space-2xl);
+}
+.register-page .right-section .register-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .register-page .right-section .register-container .container-profile-title {
   display: flex;
