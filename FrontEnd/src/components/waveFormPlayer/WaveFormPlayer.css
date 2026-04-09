@@ -31,7 +31,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(106, 93, 178, 0.16);
   pointer-events: none;
 }
 
@@ -39,13 +39,13 @@
   position: absolute;
   top: 0;
   height: 100%;
-  width: 2px;
-  background: rgba(255, 255, 255, 0.9);
+  width: 1px;
+  background: rgba(255, 255, 255, 0.211);
   pointer-events: none;
   transform: translateX(-50%);
 }
+/*  rgba(160, 147, 231, 0.424) */
 
 .waveform-bar:hover canvas {
   filter: brightness(1.08);
 }
-

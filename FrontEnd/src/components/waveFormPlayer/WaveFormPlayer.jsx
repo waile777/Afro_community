@@ -41,6 +41,7 @@ const WaveformPlayer = forwardRef(function WaveformPlayer({ audioUrl, onPlayStat
 
     const handleWaveformLeave = () => {
         setHoverProgress(null)
+  
     }
 
     useEffect(() => {
@@ -64,12 +65,13 @@ const WaveformPlayer = forwardRef(function WaveformPlayer({ audioUrl, onPlayStat
         wavesurfer.current = WaveSurfer.create({
             container: waveformRef.current,
             waveColor: "rgba(255,255,255,0.2)",
-            progressColor: "#ffffff",
-            cursorColor: "#ffffff",
-            barWidth: 2,
-            barRadius: 5,
+            progressColor: "rgba(214, 207, 255, 0.96)",
+            cursorColor: "#ffffff5f",
+            barWidth: 2.7,
             height: 110,
-            responsive: true
+            responsive: true,
+            cursorWidth : 2,
+            normalize : true
         })
 
         wavesurfer.current.load(audioUrl)
