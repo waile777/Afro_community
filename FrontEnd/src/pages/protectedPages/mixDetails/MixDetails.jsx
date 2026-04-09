@@ -22,14 +22,15 @@ import {
     StopIcon,
     RecordIcon
 } from "@/assets/musicPlayerIcons/MusicIcon";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import WaveformPlayer from "@/components/waveFormPlayer/WaveformPlayer"
-import ColorThief from 'color-thief-browser'
 
 
 function MixDetails() {
     const [mix, setMix] = useState(null)
+    const [isPlaying, setIsPlaying] = useState(false)
     const [colors, setColors] = useState([[200, 200, 200], [100, 100, 100]])
+    const waveformRef = useRef(null)
     const { dj, track } = useParams()
     const getMix = async () => {
         try {
@@ -54,60 +55,38 @@ function MixDetails() {
         console.log(mix);
     }, [mix])
 
-    // استخراج dominant colors من cover image
-    useEffect(() => {
-        if (!mix?.cover_image) return
 
-        const img = new Image()
-        img.crossOrigin = 'Anonymous'
-        img.src = mix.cover_image
-
-        img.onload = async () => {
-            const colorThief = new ColorThief()
-            const palette = await colorThief.getPalette(img, 2)
-            setColors(palette)
-        }
-    }, [mix])
-    const gradientStyle = {
-        background: `linear-gradient(to bottom, rgb(${colors[0].join(',')}), rgb(${colors[1].join(',')}))`,
-        padding: '20px',
-        borderRadius: '12px'
+    const handlePlayPause = () => {
+        waveformRef.current?.playPause()
     }
-    useEffect(() => {
-        if (!mix || !mix.cover_image) return;
-
-        const img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.src = mix.cover_image;
-
-        img.onload = async () => {
-            const colorThief = new ColorThief();
-            const palette = await colorThief.getPalette(img, 2);
-            setColors(palette);
-        }
-    }, [mix])
 
 
 
 
 
     return (
-        <div className="mix-details" style={gradientStyle}>
+        <div className="mix-details" >
             {
                 mix ? (
-                    <div className="container-mix-details-top">
+                    <div className="container-mix-details-top" >
                         <div className="top">
                             <div className="left">
                                 <h3 className="title">{mix?.title}</h3>
-                                <p className="stage_name">{mix?.user?.djProfile?.stage_name}</p>
-                                <button><PlayIcon /></button>
+                                <p className="stage_name">{mix?.user?.dj_profile.stage_name}</p>
+                                <button onClick={handlePlayPause}>
+                                    {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                                </button>
                             </div>
-                            <img src={mix?.cover_image} className="right cover_image" alt="" />
+                            <img src={mix?.cover_image} className="right cover-image" alt="" />
                         </div>
                         <div className="bottom">
                             {
                                 mix &&
-                                <WaveformPlayer audioUrl={mix?.audio_file} />
+                                <WaveformPlayer 
+                                    audioUrl={mix?.audio_file} 
+                                    ref={waveformRef}
+                                    onPlayStateChange={setIsPlaying}
+                                />
                             }
                         </div>
                     </div>

@@ -556,7 +556,7 @@ form p.error {
   justify-content: space-between;
   gap: var(--space-2xl);
   margin-top: var(--space-4xl);
-  margin-bottom: var(--space-4xl);
+  /* margin-bottom: var(--space-4xl); */
 }
 .discover main .middle-section .left-section-in-middle {
   width: 70%;

@@ -1,0 +1,51 @@
+.waveform-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.waveform-container > .timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-main, #222);
+}
+
+.waveform-container > .timeline > span {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+}
+
+.waveform-container > .waveform-bar {
+  position: relative;
+  width: 100%;
+  min-height: 110px;
+  overflow: hidden;
+}
+
+.waveform-hover-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+}
+
+.waveform-hover-marker {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.waveform-bar:hover canvas {
+  filter: brightness(1.08);
+}
+

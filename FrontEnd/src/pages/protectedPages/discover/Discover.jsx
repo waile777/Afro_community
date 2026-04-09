@@ -200,9 +200,10 @@ function Discover() {
 
   // user useEffect
   useEffect(() => {
+    getGenres()
     console.log(user);
 
-  }, [user])
+  }, [])
 
 
   const handleDropDown = (e) => {
