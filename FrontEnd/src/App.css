@@ -20,7 +20,7 @@
 
   --b-primary: #5928E5;
   --b-primary-hover: #3c1d93;
-  --b-secondary-hover: #F3F3F3;
+  --b-secondary-hover: #F3F3F3;                                          
 
 
   --border-color: #323047;
@@ -28,7 +28,7 @@
   --color-links : #00AAFF;
   
 
-  /* spacing */
+  /* spacing */                                                  
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 22px;
@@ -40,7 +40,7 @@
 
   /* radius */
   --radius-sm: 6px;
-  --radius-md: 10px;
+  --radius-md: 10px;                                                                                                                                                                                                                                                                                                                                                                                                                
   --radius-lg: 16px;
   --radius-xl: 22px;
   --radius-2xl: 40px;
