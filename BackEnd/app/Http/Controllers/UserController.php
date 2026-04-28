@@ -49,6 +49,7 @@ class UserController extends Controller
         ]);
 
         $token = $user->createToken('AUTH_TOKEN')->plainTextToken;
+
         $response = [
             'user' => $user,
             'token' => $token
@@ -70,7 +71,7 @@ class UserController extends Controller
 
                     "message" =>
                     "To get your account verified, please upload 2 original tracks.
-                     Once approved, you can upload unlimited mixes and create events.",
+                    Once approved, you can upload unlimited mixes and create events.",
 
                     "tracks_uploaded" => 0,
 

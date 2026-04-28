@@ -61,7 +61,7 @@
     </div>
 
     <div class="content">
-      <h2>Welcome, {{$user->name}} </h2>
+      <h2>Welcome, {{$user->first_name }} {{ $user->last_name }} </h2>
 
       <p>
         We're excited to have you join <strong>AfroCommunity</strong>! 🎉  
