@@ -37,6 +37,7 @@ Route::get('/test', function () {
 // ROUTES NOT SECURE :
 Route::get('/mixes', [MixController::class, 'index']);
 Route::get('mix/{id}', [MixController::class, 'show']);
+Route::get('mix/{id}/dj-likers', [MixController::class, 'getDjLikers']);
 Route::get('users', [UserController::class, 'index']);
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/{id}', [EventController::class, 'show']);
@@ -52,6 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/discover', function (Request $request) {
         return response()->json(['success', $request->user()]);
     });
+    Route::delete('/logout', [UserController::class, 'logout']);
     Route::patch('profile', [UserController::class, 'update']);
     Route::get('/djs-should-follow', [djProfileController::class, 'djsYouShouldFollow']);
 

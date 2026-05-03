@@ -117,7 +117,8 @@ header .other-section .other-options > i.clicked {
   color: var(--text-main);
 }
 header .right-section .profile-section > img {
-  width: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -128,3 +129,20 @@ header .other-section {
   gap: var(--space-sm);
   color: var(--text-secondary-op);
 }
+
+
+header .drop-down.drop-down-options {
+  list-style-position: inside;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  justify-content: flex-start;
+  position: absolute;
+  right: 0;
+  top: 150%;
+  background-color: var(--bg-main);
+  border: 1px solid var(--text-secondary-op2);
+  border-radius: var(--radius-sm);
+  width: 140px;
+}
+

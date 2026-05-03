@@ -6,7 +6,6 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\DjProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\VerificationRequiredNotification;
 
@@ -27,7 +26,6 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-
         $data = $request->validated();
 
         $roleUser = $request->is_dj ? User::ROLE_DJ : User::ROLE_LISTENER;
@@ -41,7 +39,7 @@ class UserController extends Controller
             'first_name' => $data['first_name'] ?? null,
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => HASH::make($data['password']),
+            'password' => Hash::make($data['password']),
             'role' => $roleUser,
             'profile_picture' => $path
         ]);

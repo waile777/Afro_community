@@ -139,20 +139,25 @@ class MixController extends Controller
             ->with(['user' => function ($query) {
                 $query->with('djProfile')->withCount(['mixes', 'followers']);
             }])
+            ->withCount('comments')
+            ->with('comments.user.djProfile')
             ->withCount('likes')
             ->firstOrFail();
-        
-        // Count DJ likes on comments
-        $djLikesCount = $mix->comments()
+
+        // Count DJ likes on the mix
+        $djLikesCount = $mix->likes()
             ->whereHas('user', function ($q) {
                 $q->where('role', 'dj');
             })
             ->count();
-        
+
         $mix->dj_likes_count = $djLikesCount;
         $mix->mix_likes_count = $mix->likes_count;
         unset($mix->likes_count);
         $mix->audio_file = url('/mix-audio/' . basename($mix->audio_file));
+
+
+
 
         return response()->json($mix);
     }
@@ -202,6 +207,35 @@ class MixController extends Controller
     {
         return  response()->json([
             'genres' => Mix::genres()
+        ]);
+    }
+
+    /**
+     * Get DJ likers for a specific mix
+     */
+    public function getDjLikers($id)
+    {
+        try {
+            $mix = Mix::findOrFail($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Mix not found',
+                'dj_likers' => []
+            ], 404);
+        }
+
+        $djLikers = $mix->likes()
+            ->whereHas('user', function ($query) {
+                $query->where('role', 'dj');
+            })
+            ->with(['user' => function ($query) {
+                $query->with('djProfile')->withCount(['followers']);
+            }])
+            ->get()
+            ->pluck('user');
+
+        return response()->json([
+            'dj_likers' => $djLikers->values()->all()
         ]);
     }
 }

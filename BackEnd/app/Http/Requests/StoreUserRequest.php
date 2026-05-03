@@ -31,8 +31,7 @@ class StoreUserRequest extends FormRequest
                 'stage_name' => 'required_if:is_dj,1|unique:dj_profiles,stage_name|max:30|min:2|regex:/^[a-zA-Z0-9_-]+$/', // letters, numbers, underscore, dash only
                 'bio' => 'nullable|string|min:10|max:200',
                 
-            ]
-        ;
+            ];
     }
 
     public function messages(): array

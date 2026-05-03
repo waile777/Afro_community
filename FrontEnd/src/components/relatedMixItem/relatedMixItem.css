@@ -1,0 +1,82 @@
+.related-mix-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-1);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.related-mix-item .left {
+  flex-shrink: 0;
+}
+
+.related-mix-item .left .container-cover {
+  width: 52px;
+  height: 52px;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.related-mix-item .left .cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.related-mix-item .left .cover-image:hover {
+  transform: scale(1.03);
+}
+
+.related-mix-item .center {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+  min-width: 0;
+}
+
+.related-mix-item .center .title {
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.related-mix-item .center .title:hover {
+  color: var(--text-secondary-op);
+}
+
+.related-mix-item .center .type {
+  font-size: var(--text-xss);
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.related-mix-item .center .mix-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: var(--text-xss);
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.related-mix-item .center .mix-stats > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.related-mix-item .center .mix-stats > div > i {
+  font-size: 0.85em;
+  color: var(--text-secondary-op);
+}

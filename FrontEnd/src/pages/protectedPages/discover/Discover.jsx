@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import Footer from "../../../components/footer/Footer"
 // import Data Main
+import logoWithoutName from "@/assets/logo/logo_bold_without_name.svg"
 import RecentlyPlayed from "../../../components/recentlyPlayed/RecentlyPlayed"
 import MoreOfWhatYouLike from "../../../components/moreOfWhatYouLike/MoreOfWhatYouLike"
 import DjsShouldFollow from "../../../components/djsShouldFollow/DjsShouldFollow"
 import VerificationPopup from "../../../components/verificationPopup/VerificationPopup.jsx"
-import { useNotifications } from "@/context/NotificationContext"
+import { useNotifications } from "@/context/useNotifications"
 function Discover() {
   const { notifications } = useNotifications()
   const user = JSON.parse(localStorage.getItem('user'));
@@ -316,6 +317,8 @@ function Discover() {
           </section>
         </section>
       </main>
+      <img className="logo-without-name" src={logoWithoutName} />
+
     </div >
   )
 }

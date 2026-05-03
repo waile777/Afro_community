@@ -573,3 +573,10 @@ form p.error {
   flex-direction: column;
   gap: var(--space-md);
 }
+
+.discover img.logo-without-name {
+  width: 90%;
+  height: 20px;
+  
+  
+}

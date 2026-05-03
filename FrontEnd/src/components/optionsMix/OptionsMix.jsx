@@ -54,10 +54,6 @@ function OptionsMix() {
         ))
         
     }
-    useEffect(() => {
-        console.log(optionClicked);
-        
-    },[optionClicked])
 
 
         const filteredButtons = links.filter(link => {

@@ -34,7 +34,9 @@ class CommentController extends Controller
             'mix_id' => $id,
             'content' =>$request->content,
         ]);
-        return response()->json($comment);
+        return response()->json($comment->load(['user' => function ($query) {
+            $query->with('djProfile');
+        }]));
     }
 
     /**
@@ -58,6 +60,9 @@ class CommentController extends Controller
         $comment->update($request->only([
             'content'
         ]));
+        $comment->load(['user' => function ($query) {
+            $query->with('djProfile');
+        }]);
         return response()->json([
             'message' => 'Comment updated',
             'comment' => $comment

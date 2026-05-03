@@ -7,45 +7,29 @@ import Discover from './pages/protectedPages/discover/Discover'
 import Home from './pages/home/Home'
 import MixDetails from './pages/protectedPages/mixDetails/MixDetails'
 import MainLayout from "./components/layout/MainLayout"
-import { NotificationProvider } from "@/context/NotificationContext"
 
 function App() {
   return (
-    <NotificationProvider>
+    <Routes>
 
-      <Routes>
+      {/* pages WITHOUT header */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-        {/* pages WITHOUT header */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      {/* pages WITH header */}
+      <Route element={
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      }>
 
-        {/* pages WITH header */}
-        <Route element={<MainLayout />}>
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/mix/:dj/:track" element={<MixDetails />} />
 
-          <Route
-            path="/discover"
-            element={
-              <ProtectedRoute>
-                <Discover />
-              </ProtectedRoute>
-            }
-          />
+      </Route>
 
-          <Route
-            path="/mix/:dj/:track"
-            element={
-              <ProtectedRoute>
-                <MixDetails />
-              </ProtectedRoute>
-            }
-          />
-
-        </Route>
-
-      </Routes>
-
-    </NotificationProvider>
+    </Routes>
   )
 }
 

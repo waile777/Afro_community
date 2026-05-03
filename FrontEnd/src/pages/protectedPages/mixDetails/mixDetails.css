@@ -1,6 +1,6 @@
 .mix-details {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   width: var(--width-laptop);
   margin: 0 auto;
@@ -54,7 +54,6 @@
   color: var(--text-main);
 }
 .mix-details .top > .left > button {
-  margin-top: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,23 +116,33 @@
 .mix-details > .middle-section {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  gap: var(--space-2xl);
   width: 100%;
 }
 
 .mix-details > .middle-section > .left {
   width: 70%;
 }
+.mix-details > .middle-section > .right {
+  width: 30%;
+}
+.mix-details > .middle-section > .left > section.comment-section > form,
 .mix-details > .middle-section > .left > section.comment-section {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  width: 100%;
 }
 .mix-details > .middle-section > .left > section.comment-section > img {
   border-radius: 50%;
   width: 40px;
 }
-.mix-details > .middle-section > .left > section.comment-section > input {
+.mix-details
+  > .middle-section
+  > .left
+  > section.comment-section
+  > form
+  > input {
   outline: none;
   padding: var(--input-padding);
   border-radius: var(--radius-sm);
@@ -147,7 +156,7 @@
   > .middle-section
   > .left
   > section.comment-section
-  > button.send-comment {
+  button.send-comment {
   background-color: var(--border-color);
   padding: var(--space-xs);
   border-radius: var(--radius-sm);
@@ -159,7 +168,7 @@
   > .middle-section
   > .left
   > section.comment-section
-  > button.send-comment
+   button.send-comment
   > i {
   color: var(--text-secondary-op);
   font-size: 16px;
@@ -168,22 +177,43 @@
   > .middle-section
   > .left
   > section.comment-section
-  > button.send-comment.active {
+   button.send-comment.active {
   cursor: pointer;
   transition: 0.2s all linear;
+  pointer-events: painted;
 }
 .mix-details
   > .middle-section
   > .left
   > section.comment-section
-  > button.send-comment.active:hover {
+  button.send-comment.active:hover {
   background-color: var(--text-secondary);
 }
-.mix-details > .middle-section  .options-mix   {
+.mix-details > .middle-section .options-mix {
   display: flex;
   justify-content: space-between;
-
+  align-items: flex-start;
 }
-.mix-details > .middle-section  .options-mix > .right {
+.mix-details > .middle-section .options-mix > .right {
   display: flex;
+}
+
+/* profile dj comments */
+
+.mix-details > .middle-section .profile_dj_comments {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+.mix-details > .middle-section .profile_dj_comments > .right {
+  width: 100%;
+}
+
+img.logo-without-name {
+  width: 20px;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
 }
