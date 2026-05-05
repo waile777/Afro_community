@@ -111,40 +111,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // Notif
-    Route::get(
-        '/notifications',
-        [NotificationController::class, 'index']
-    );
+    Route::get('/notifications',[NotificationController::class, 'index']);
 
-    Route::get(
-        '/notifications/unread',
-        [NotificationController::class, 'unread']
-    );
+    Route::get('/notifications/unread',[NotificationController::class, 'unread']);
 
-    Route::get(
-        '/notifications/unread-count',
-        [NotificationController::class, 'unreadCount']
-    );
+    Route::get('/notifications/unread-count',[NotificationController::class, 'unreadCount']);
 
-    Route::post(
-        '/notifications/{id}/read',
-        [NotificationController::class, 'markAsRead']
-    );
+    Route::post('/notifications/{id}/read',[NotificationController::class, 'markAsRead']);
 
-    Route::post(
-        '/notifications/read-all',
-        [NotificationController::class, 'markAllAsRead']
-    );
+    Route::post('/notifications/read-all',[NotificationController::class, 'markAllAsRead']);
 
-    Route::delete(
-        '/notifications/{id}',
-        [NotificationController::class, 'destroy']
-    );
-
-    Route::post('/notifications/read-normal', [NotificationController::class, 'markNormalAsRead']);
-
-
-
+    Route::delete('/notifications/{id}',[NotificationController::class, 'destroy']);
     //tickets
     Route::post('/events/{event}/tickets', [TicketController::class, 'store']);
     Route::delete('/tickets/{id}', [TicketController::class, 'destroy']);

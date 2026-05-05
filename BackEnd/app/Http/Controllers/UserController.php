@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Mail\WelcomeMail;
 use App\Models\DjProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\VerificationRequiredNotification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -45,6 +48,7 @@ class UserController extends Controller
         ]);
 
         $token = $user->createToken('AUTH_TOKEN')->plainTextToken;
+
         $response = [
             'user' => $user,
             'token' => $token
@@ -66,7 +70,7 @@ class UserController extends Controller
 
                     "message" =>
                     "To get your account verified, please upload 2 original tracks.
-                     Once approved, you can upload unlimited mixes and create events.",
+                    Once approved, you can upload unlimited mixes and create events.",
 
                     "tracks_uploaded" => 0,
 
@@ -77,6 +81,8 @@ class UserController extends Controller
                 ])
             );
         }
+
+        Mail::to($user->email)->send(new WelcomeMail($user));
 
         return response()->json($response);
     }

@@ -1,4 +1,6 @@
-
+.notification {
+    padding-bottom: 20px;
+}
 .line {
     width: 30%;
     height: 1px;
@@ -15,6 +17,7 @@
 .notification-empty > p {
     font-weight: bold;
 }
+
 
 .drop-down.drop-down-notification > a,
 .notification-empty > a {

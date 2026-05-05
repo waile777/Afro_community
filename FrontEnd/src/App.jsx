@@ -7,15 +7,31 @@ import Discover from './pages/protectedPages/discover/Discover'
 import Home from './pages/home/Home'
 import MixDetails from './pages/protectedPages/mixDetails/MixDetails'
 import MainLayout from "./components/layout/MainLayout"
-
+import GuestRoute from './components/GuestRoute'
+import PublicRoute from './components/PublicRoute'
+import Upload from './pages/uploadPage/upload'
+import { NotificationProvider } from '@/context/NotificationContext'
 function App() {
   return (
     <Routes>
 
       {/* pages WITHOUT header */}
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+
+      <Route path="/" element={
+        <PublicRoute>
+          <Home />
+        </PublicRoute>
+      } />
+      <Route path="/login" element={
+        <GuestRoute>
+          <Login />
+        </GuestRoute>
+      } />
+      <Route path="/register" element={
+        <GuestRoute>
+          <Register />
+        </GuestRoute>
+      } />
 
       {/* pages WITH header */}
       <Route element={
