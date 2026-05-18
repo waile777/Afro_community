@@ -1,17 +1,7 @@
-import React from 'react'
-import Logo_bold_without_name from "../../assets/logo/Logo_bold_without_name.svg"
-import logo from "../../assets/logo/logo.png"
-
-// function Upload() {
-//     return (
-//         <>
-//             <img src={logo} className="logo" alt="AfroCommunity Logo" />
-//             <h1>hi basset welcome hhh hhh hhh</h1>
-//         </>
-//     )
-// }
-
-// export default Upload
+import React from "react";
+import Logo_bold_without_name from "../../assets/logo/Logo_bold_without_name.svg";
+import logo from "../../assets/logo/logo.png";
+import downloadimg from "../../assets/downloadimg/Downloads.png";
 
 import { useState } from "react";
 import "./upload.css";
@@ -29,11 +19,10 @@ export default function UploadPage() {
 
   return (
     <div className="upload-page">
-
       {/* Header */}
       <div className="top-bar">
         <div className="logo-title">
-          <img src={logo} className="logo" alt="AfroCommunity Logo" />
+          <img src={logo} className="logo-image" alt="AfroCommunity Logo" />
           <h1>Upload</h1>
         </div>
         <div className="close-btn">✕</div>
@@ -63,7 +52,9 @@ export default function UploadPage() {
         }}
         onDragOver={(e) => e.preventDefault()}
       >
-        <div className="icon">⬇</div>
+        <div className="downloadimg">
+          <img src={downloadimg} alt="downloadimg" />
+        </div>
         <p>Drag and drop audio files to get started.</p>
 
         <label className="upload-btn">
@@ -73,7 +64,7 @@ export default function UploadPage() {
             hidden
             multiple
             onChange={(e) => handleFiles(e.target.files)}
-          />
+            />
         </label>
 
         <p className="remaining">Remaining uploads: {2 - tracks.length}</p>
@@ -90,6 +81,7 @@ export default function UploadPage() {
         </ul>
       </div>
 
+      {console.log("hellooo")}
     </div>
   );
 }
