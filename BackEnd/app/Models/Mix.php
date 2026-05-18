@@ -65,7 +65,7 @@ class Mix extends Model
     // get Path cover Image to the frontend whtih Accessoire get + fieldName + Attribute
     public function getCoverImageAttribute($value)
     {
-        return asset('storage/' . $value);
+        return url('cover-image/' . basename($value));
     }
     // get Path Audio File to the frontend whtih Accessoire get + fieldName + Attribute
     public function getAudioFileAttribute($value)

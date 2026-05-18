@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
-use Dom\Comment;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,7 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'profile_picture'
+        'profile_picture',
+        'account_status'
     ];
 
     /**
@@ -47,6 +48,11 @@ class User extends Authenticatable
             'id' => 'integer',
             'password' => 'hashed'
         ];
+    }
+
+    public function getProfilePictureUrlAttribute()
+    {
+        return Storage::url($this->profile_picture);
     }
     // ROLE_CONSTANT:
     const ROLE_ADMIN =  'admin';

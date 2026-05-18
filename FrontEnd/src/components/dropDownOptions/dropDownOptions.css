@@ -1,0 +1,36 @@
+header .drop-down.drop-down-options > li {
+  padding: var(--space-sm);
+  margin-right: var(--space-xl);
+  cursor: pointer;
+  width: 100%;
+}
+
+header .drop-down.drop-down-options > li > a {
+  margin-left: var(--space-xs);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: var(--text-xss);
+  width: 100%;
+}
+header .drop-down.drop-down-options > li > button.logout {
+  width: 100%;
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-weight: bold;
+  transition: 0.2s all ease;
+}
+header .drop-down.drop-down-options > li > button.logout:hover {
+    color: var(--text-secondary-op);
+}
+header .drop-down.drop-down-options > li:hover > a {
+  color: var(--text-secondary-op);
+}
+
+header .drop-down.drop-down-options > li > .line {
+  width: 100%;
+  background-color: var(--text-secondary-op2);
+  height: 1px;
+  margin-bottom: 10px;
+}

@@ -23,6 +23,7 @@ function Register() {
   })
   const [passwordOpen, setPasswordOpen] = useState(true)
   const [textareaCount, setTextareaCount] = useState(0)
+  const [previewUrl, setPreviewUrl] = useState(null)
   const [infoRegister, setInfoRegister] = useState({
     first_name: '',
     last_name: '',
@@ -65,19 +66,18 @@ function Register() {
   const handleprofile_picture = (e) => {
     const file = e.target.files[0]
     if (file && file.type.startsWith('image/')) {
+      setInfoRegister((infos) => {
+        return {
+          ...infos,
+          profile_picture: file
+        }
+      })
       const reader = new FileReader()
       reader.onloadend = () => {
-        setInfoRegister((infos) => {
-          return {
-            ...infos,
-            profile_picture: reader.result
-          }
-        })
+        setPreviewUrl(reader.result)
       }
       reader.readAsDataURL(file)
     }
-
-
   }
 
 
@@ -154,7 +154,7 @@ function Register() {
           <div className="container-profile-title">
             <h2 className="title">Create Account</h2>
             <div className="container-profile">
-              <img src={!infoRegister.profile_picture ? defaultprofile_picture : infoRegister.profile_picture} alt="profile_picture" />
+              <img src={previewUrl || defaultprofile_picture} alt="profile_picture" />
               <label htmlFor="profile_picture" className='label-profile-picture'>Upload Profile</label>
               <input type="file" id='profile_picture' name="profile_picture" onChange={(e) => handleprofile_picture(e)} />
             </div>

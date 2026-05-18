@@ -1,0 +1,38 @@
+.related-mixes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-2);
+  width: 100%;
+}
+
+.related-mixes > .top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.related-mixes > .top-section .title {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.related-mixes > .top-section > .view-all {
+  text-transform: uppercase;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  color: var(--text-secondary-op);
+}
+
+.related-mixes > .top-section > .view-all:hover {
+  color: var(--text-main);
+}
+
+.related-mixes > .mixes-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}

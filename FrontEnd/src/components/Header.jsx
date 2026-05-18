@@ -1,15 +1,15 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import './header.css'
 import NavLinks from "@/components/navLinks/NavLinks"
 import DropDownProfile from "@/components/dropDownProfile/DropDownProfile"
+import DropDownOptions from "@/components/dropDownOptions/DropDownOptions"
 import DropDownNotification from "@/components/dropDownNotification/DropDownNotification"
 import VerificationBanner from "@/components/verificationBanner/VerificationBanner"
-
+import api from '@/api.js'
 import logoWithoutName from "@/assets/logo/logo_bold_without_name.svg"
 
-import { useNotifications }
-    from "@/context/NotificationContext"
+import { useNotifications } from "@/context/useNotifications"
 
 function Header() {
 
@@ -17,9 +17,15 @@ function Header() {
 
     const profileRef = useRef()
     const notifRef = useRef()
+    const optionsRef = useRef()
 
-    const user =
-        JSON.parse(localStorage.getItem('user'))
+    const user = useMemo(() => {
+        try {
+            return JSON.parse(localStorage.getItem('user'))
+        } catch {
+            return null
+        }
+    }, [])
 
     const {
         notifications,
@@ -119,6 +125,17 @@ function Header() {
                     }))
 
                 }
+                if (
+                    optionsRef.current &&
+                    !optionsRef.current.contains(e.target)
+                ) {
+
+                    setDropDown(prev => ({
+                        ...prev,
+                        options: false
+                    }))
+
+                }
 
             }
 
@@ -137,6 +154,10 @@ function Header() {
         }
 
     }, [])
+
+    if (!user) {
+        return null
+    }
 
     return (
 
@@ -199,6 +220,18 @@ function Header() {
                     />
 
                 </div>
+
+            }
+            {dropDown.options &&
+
+                <ul
+                    ref={optionsRef}
+                    className="drop-down drop-down-options"
+                >
+
+                    <DropDownOptions />
+
+                </ul>
 
             }
 

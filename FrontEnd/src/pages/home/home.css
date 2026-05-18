@@ -13,6 +13,8 @@
   object-fit: cover;
   position: relative;
   border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
 }
 .home header > *:not(img) {
   padding: var(--space-md);
@@ -30,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .home header .top > img {
   width: 35px;
@@ -69,6 +72,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  width: 100%;
 }
 .home header .center .title {
   color: var(--text-main);
@@ -81,7 +85,9 @@
   font-size: var(--text-xxs);
   width: 600px;
 }
-
+.home header .bottom {
+  width: 100%;
+}
 /* search bar section */
 .home .search-bar-container {
   display: flex;

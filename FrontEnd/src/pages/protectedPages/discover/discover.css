@@ -556,7 +556,7 @@ form p.error {
   justify-content: space-between;
   gap: var(--space-2xl);
   margin-top: var(--space-4xl);
-  margin-bottom: var(--space-4xl);
+  /* margin-bottom: var(--space-4xl); */
 }
 .discover main .middle-section .left-section-in-middle {
   width: 70%;
@@ -572,4 +572,11 @@ form p.error {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+}
+
+.discover img.logo-without-name {
+  width: 90%;
+  height: 20px;
+  
+  
 }

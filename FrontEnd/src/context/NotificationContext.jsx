@@ -1,8 +1,6 @@
-import { createContext, useContext, useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import api from "@/api"
-
-const NotificationContext =
-    createContext()
+import NotificationContext from "./NotificationContextObj"
 
 export function NotificationProvider({ children }) {
 
@@ -12,50 +10,40 @@ export function NotificationProvider({ children }) {
     const [loadingNotif, setLoadingNotif] =
         useState(false)
 
-    const getNotifications = async () => {
-
+    const getNotifications = useCallback(async () => {
         setLoadingNotif(true)
 
         try {
-
-            const res =
-                await api.get("/notifications")
-
+            const res = await api.get("/notifications")
             setNotifications(res.data)
-
         } catch (err) {
-
             console.log(err)
-
+        } finally {
+            setLoadingNotif(false)
         }
-
-        setLoadingNotif(false)
-
-    }
-
-    useEffect(() => {
-
-        getNotifications()
-
     }, [])
 
-    return (
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (!token) return
 
+        const fetchNotifications = async () => {
+            await getNotifications()
+        }
+
+        fetchNotifications()
+    }, [getNotifications])
+
+    return (
         <NotificationContext.Provider
             value={{
                 notifications,
                 setNotifications,
                 loadingNotif,
-                getNotifications
+                getNotifications,
             }}
         >
-
             {children}
-
         </NotificationContext.Provider>
-
     )
-
 }
-
-export const useNotifications = () => useContext(NotificationContext)

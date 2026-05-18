@@ -1,4 +1,6 @@
-
+.notification {
+    padding-bottom: 20px;
+}
 .line {
     width: 30%;
     height: 1px;
@@ -16,9 +18,10 @@
     font-weight: bold;
 }
 
-.drop-down.drop-down-notification > a {
+
+.drop-down.drop-down-notification > a,
+.notification-empty > a {
     color: var(--color-links);
     font-size: var(--text-xss);
     align-self: center;
-    margin-top: var(--space-lg);
 }

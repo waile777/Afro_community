@@ -5,27 +5,47 @@ import Register from './pages/register/Register'
 import ProtectedRoute from './components/ProtectedRoute'
 import Discover from './pages/protectedPages/discover/Discover'
 import Home from './pages/home/Home'
+import MixDetails from './pages/protectedPages/mixDetails/MixDetails'
+import MainLayout from "./components/layout/MainLayout"
+import GuestRoute from './components/GuestRoute'
+import PublicRoute from './components/PublicRoute'
 import Upload from './pages/uploadPage/upload'
-import {NotificationProvider} from '@/context/NotificationContext'
+import { NotificationProvider } from '@/context/NotificationContext'
 function App() {
   return (
-    <NotificationProvider>
+    <Routes>
 
-      <Routes>
+      {/* pages WITHOUT header */}
 
-        {/* pages WITHOUT header */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/discover" element={
-          <ProtectedRoute>
-            <Discover />
-          </ProtectedRoute>
-        } />
-        <Route path='/upload' element={<Upload/>}/>
-      </Routes>
+      <Route path="/" element={
+        <PublicRoute>
+          <Home />
+        </PublicRoute>
+      } />
+      <Route path="/login" element={
+        <GuestRoute>
+          <Login />
+        </GuestRoute>
+      } />
+      <Route path="/register" element={
+        <GuestRoute>
+          <Register />
+        </GuestRoute>
+      } />
 
-    </NotificationProvider>
+      {/* pages WITH header */}
+      <Route element={
+        <ProtectedRoute>
+          <MainLayout />
+        </ProtectedRoute>
+      }>
+
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/mix/:dj/:track" element={<MixDetails />} />
+
+      </Route>
+
+    </Routes>
   )
 }
 
